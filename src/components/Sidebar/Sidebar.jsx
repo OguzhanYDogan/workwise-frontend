@@ -1,7 +1,3 @@
-
-import "../../assets/static/js/components/dark.js"
-import "../../assets/static/js/initTheme.js"
-import "../../assets/static/js/components/sidebar.js"
 import { useEffect } from "react";
 import { useState } from "react";
 function Sidebar() {
