@@ -22175,8 +22175,8 @@ body .bi:before,
 }
 
 .avatar .avatar-content {
-    width: 32px;
-    height: 32px;
+    width: 200px;
+    height: 200px;
     color: #fff;
     display: flex;
     justify-content: center;
@@ -22196,8 +22196,9 @@ body .bi:before,
 }
 
 .avatar img {
-    width: 32px;
-    height: 32px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
     border-radius: 50%
 }
 
@@ -23064,13 +23065,17 @@ body .bi:before,
 
 .sidebar-wrapper .sidebar-header {
     padding: 2rem 2rem 1rem;
-    font-size: 2rem;
+    font-size: 1.7rem;
     font-weight: 700
 }
 
+
 .sidebar-wrapper .sidebar-header img {
-    height: 1.2rem
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
 }
+
 
 .sidebar-wrapper .sidebar-toggler.x {
     position: absolute;

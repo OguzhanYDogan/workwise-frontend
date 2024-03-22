@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import brandImage from '../../assets/static/images/logo/brand.png';
 function Sidebar() {
     const THEME_KEY = "theme";
     const [theme, setTheme] = useState("light");
@@ -33,8 +34,8 @@ function Sidebar() {
                     <div className="sidebar-header position-relative">
                         <div className="d-flex justify-content-between align-items-center">
                             <div className="logo">
-                                {/* <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Logo" srcSet="" /> */}
-                                <a href="index.html">WorkWise</a>
+                                <a href="index.html"><img src={brandImage} alt="brand" />
+                                    WorkWise</a>
                             </div>
                             <div className="theme-toggle d-flex gap-2  align-items-center mt-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" aria-hidden="true"
