@@ -23020,7 +23020,7 @@ body .bi:before,
 }
 
 #sidebar .sidebar-wrapper {
-    left: -300px;
+    left: -400px;
 
 }
 
@@ -23034,12 +23034,12 @@ body .bi:before,
     }
 
     #sidebar~#main {
-        margin-left: 300px
+        margin-left: 400px
     }
 }
 
 #sidebar.inactive .sidebar-wrapper {
-    left: -300px
+    left: -400px
 }
 
 #sidebar.inactive~#main {
@@ -23233,7 +23233,7 @@ body .bi:before,
 @media screen and (max-width: 1199px) {
     .sidebar-wrapper {
         position: fixed;
-        left: -300px
+        left: -400px
     }
 
     .sidebar-wrapper .sidebar-toggler.x {

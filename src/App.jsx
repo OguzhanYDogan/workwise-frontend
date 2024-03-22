@@ -1,7 +1,6 @@
 import './App.css'
 import "./assets/compiled/css/app.css"
 import "./assets/compiled/css/app-dark.css"
-import "./assets/compiled/js/app.js"
 import "./assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"
 //import "./assets/extensions/apexcharts/apexcharts.min.js"
 //import "./assets/static/js/pages/dashboard.js"
