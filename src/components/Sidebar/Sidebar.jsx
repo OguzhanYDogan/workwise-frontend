@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import brandImage from '../../assets/static/images/logo/brand.png';
+import { NavLink } from "react-router-dom";
+import SidebarMenuItem from "./SidebarMenuItem";
+import SidebarSubMenu from "./SidebarSubMenu";
 function Sidebar() {
     const THEME_KEY = "theme";
     const [theme, setTheme] = useState("light");
@@ -32,9 +35,9 @@ function Sidebar() {
             <div id="sidebar" className="sidebar-desktop">
                 <div className="sidebar-wrapper active">
                     <div className="sidebar-header position-relative">
-                        <div className="d-flex justify-content-between align-items-center">
+                        <div className="d-flex justify-content-between align-items-center flex-column">
                             <div className="logo">
-                                <a href="index.html"><img src={brandImage} alt="brand" />
+                                <a href="/"><img src={brandImage} alt="brand" />
                                     WorkWise</a>
                             </div>
                             <div className="theme-toggle d-flex gap-2  align-items-center mt-2">
@@ -74,17 +77,13 @@ function Sidebar() {
                         <ul className="menu">
                             <li className="sidebar-title">Menu</li>
 
-                            <li
-                                className="sidebar-item active ">
-                                <a href="index.html" className='sidebar-link'>
-                                    <i className="bi bi-grid-fill"></i>
-                                    <span>Dashboard</span>
-                                </a>
+                            <SidebarMenuItem to="/" label="Profile" icon="bi-person-fill" />
+                            <SidebarMenuItem to="/update" label="Update" icon="bi-person-fill-gear" />
+                            <SidebarMenuItem to="/detail" label="Detail" icon="bi-person-lines-fill" />
 
 
-                            </li>
 
-                            <li
+                            {/* <li
                                 className="sidebar-item  has-sub">
                                 <a href="#" className='sidebar-link'>
                                     <i className="bi bi-stack"></i>
@@ -705,7 +704,7 @@ function Sidebar() {
                                 </a>
 
 
-                            </li>
+                            </li> */}
 
                         </ul>
                     </div>

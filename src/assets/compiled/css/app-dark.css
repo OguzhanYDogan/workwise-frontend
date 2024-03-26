@@ -9912,7 +9912,7 @@ html[data-bs-theme=dark] #sidebar~#main {
     }
 
     html[data-bs-theme=dark] #sidebar~#main {
-        margin-left: 400px
+        margin-left: 300px
     }
 }
 
@@ -9929,7 +9929,7 @@ html[data-bs-theme=dark] #sidebar.active .sidebar-wrapper {
 }
 
 html[data-bs-theme=dark] .sidebar-wrapper {
-    width: 400px;
+    width: 300px;
     height: 100vh;
     position: fixed;
     top: 0;

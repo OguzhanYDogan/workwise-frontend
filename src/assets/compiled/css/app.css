@@ -23035,7 +23035,7 @@ body .bi:before,
     }
 
     #sidebar~#main {
-        margin-left: 400px
+        margin-left: 300px
     }
 }
 
@@ -23052,7 +23052,7 @@ body .bi:before,
 }
 
 .sidebar-wrapper {
-    width: 400px;
+    width: 300px;
     height: 100vh;
     position: fixed;
     top: 0;
@@ -24134,4 +24134,9 @@ a {
 
 .z-1 {
     z-index: 1
+}
+
+.profileInfo {
+    display: flex;
+    justify-content: center;
 }
