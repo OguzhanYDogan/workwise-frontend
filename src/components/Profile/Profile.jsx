@@ -1,6 +1,26 @@
+import { useEffect, useState } from "react"
 import photo from "../../assets/static/images/faces/2.jpg"
+import axios from "axios";
 
 function Profile() {
+    const id = "ec8159d1-4388-4fb9-8b51-767b64273296";
+    const uri = "https://workwisewebapi.azurewebsites.net/api/user?id="
+    const [info, setInfo] = useState(null);
+
+    useEffect(() => {
+        Get();
+    }, []);
+
+    async function Get() {
+        try {
+            const response = await axios.get(uri + id);
+            if (response.data && response.data.personalDetail) {
+                setInfo(response.data);
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
 
     return (
         <>
@@ -21,9 +41,8 @@ function Profile() {
                                             <div className="avatar avatar-2xl">
                                                 <img src={photo} alt="Avatar" />
                                             </div>
-
-                                            <h3 className="mt-3">John Doe</h3>
-                                            <p className="text-small">Junior Software Engineer</p>
+                                            <h3 className="mt-3">{info ? info.personalDetail.firstName + " " + info.personalDetail.lastName : ""}</h3>
+                                            <p className="text-small">{info ? info.personalDetail.profession : ""}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -33,37 +52,37 @@ function Profile() {
                                     <div className="card-body">
                                         <div className="row mb-4">
                                             <div className="col-3 fw-bold">Name : </div>
-                                            <div className="col-9 profileInfo">John</div>
+                                            <div className="col-9 profileInfo">{info ? info.personalDetail.firstName : ""}</div>
                                         </div>
                                         <hr />
                                         <div className="row mb-4">
                                             <div className="col-3 fw-bold">Surname : </div>
-                                            <div className="col-9 profileInfo">Doe</div>
+                                            <div className="col-9 profileInfo">{info ? info.personalDetail.lastName : ""}</div>
                                         </div>
                                         <hr />
                                         <div className="row mb-4">
                                             <div className="col-3 fw-bold">Email : </div>
-                                            <div className="col-9 profileInfo">johndoe@workwise.com</div>
+                                            <div className="col-9 profileInfo">{info ? info.email : ""}</div>
                                         </div>
                                         <hr />
                                         <div className="row mb-4">
                                             <div className="col-3 fw-bold">Phone : </div>
-                                            <div className="col-9 profileInfo">555 444 33 22</div>
+                                            <div className="col-9 profileInfo">{info ? info.phoneNumber : ""}</div>
                                         </div>
                                         <hr />
                                         <div className="row mb-4">
                                             <div className="col-3 fw-bold">Job : </div>
-                                            <div className="col-9 profileInfo">Junior Software Developer</div>
+                                            <div className="col-9 profileInfo">{info ? info.personalDetail.profession : ""}</div>
                                         </div>
                                         <hr />
                                         <div className="row mb-4">
                                             <div className="col-3 fw-bold">Department : </div>
-                                            <div className="col-9 profileInfo">DevOps</div>
+                                            <div className="col-9 profileInfo">{info ? info.personalDetail.department : ""}</div>
                                         </div>
                                         <hr />
                                         <div className="row mb-4">
                                             <div className="col-3 fw-bold">Address : </div>
-                                            <div className="col-9 profileInfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                                            <div className="col-9 profileInfo">{info ? info.personalDetail.address : ""}</div>
                                         </div>
                                         <div className="d-flex justify-content-between">
                                             <a href="/update" className="btn btn-primary">Update Profile</a>
