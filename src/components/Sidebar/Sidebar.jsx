@@ -57,7 +57,7 @@ function Sidebar() {
                                     </g>
                                 </svg>
                                 <div className="form-check form-switch fs-6">
-                                    <input className="form-check-input me-0" type="checkbox" id="toggle-dark" style={{ cursor: "pointer" }} onChange={toggleDarkTheme} />
+                                    <input className="form-check-input me-0" type="checkbox" id="toggle-dark" style={{ cursor: "pointer" }} onChange={toggleDarkTheme} checked={theme ? theme == "dark" : ""} />
                                     <label className="form-check-label"></label>
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" aria-hidden="true"

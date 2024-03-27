@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import photo from "../../assets/static/images/faces/2.jpg"
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function ProfileDetail() {
     const id = "ec8159d1-4388-4fb9-8b51-767b64273296";
@@ -58,7 +59,7 @@ function ProfileDetail() {
                                         <hr />
                                         <div className="row mb-4">
                                             <div className="col-3 fw-bold">Second Name : </div>
-                                            <div className="col-9 profileInfo">{info ? info.personalDetail.secondName : ""}</div>
+                                            <div className="col-9 profileInfo">{info ? info.personalDetail.secondName == "" ? "-" : info.personalDetail.secondName : ""}</div>
                                         </div>
                                         <hr />
                                         <div className="row mb-4">
@@ -68,12 +69,12 @@ function ProfileDetail() {
                                         <hr />
                                         <div className="row mb-4">
                                             <div className="col-3 fw-bold">Second Surname : </div>
-                                            <div className="col-9 profileInfo">{info ? info.personalDetail.secondLastName : ""}</div>
+                                            <div className="col-9 profileInfo">{info ? info.personalDetail.secondLastName == "" ? "-" : info.personalDetail.secondLastName : ""}</div>
                                         </div>
                                         <hr />
                                         <div className="row mb-4">
                                             <div className="col-3 fw-bold">Birth Date : </div>
-                                            <div className="col-9 profileInfo">{info ? info.personalDetail.birthDate : ""}</div>
+                                            <div className="col-9 profileInfo">{info ? new Date(info.personalDetail.birthDate).toLocaleDateString() : ""}</div>
                                         </div>
                                         <hr />
                                         <div className="row mb-4">
@@ -88,12 +89,12 @@ function ProfileDetail() {
                                         <hr />
                                         <div className="row mb-4">
                                             <div className="col-3 fw-bold">Hire Date : </div>
-                                            <div className="col-9 profileInfo">{info ? info.personalDetail.startDate : ""}</div>
+                                            <div className="col-9 profileInfo">{info ? new Date(info.personalDetail.startDate).toLocaleDateString() : ""}</div>
                                         </div>
                                         <hr />
                                         <div className="row mb-4">
                                             <div className="col-3 fw-bold">Leave Date : </div>
-                                            <div className="col-9 profileInfo">{info ? info.personalDetail.endDate : ""}</div>
+                                            <div className="col-9 profileInfo">{info ? new Date(info.personalDetail.endDate).toLocaleDateString() : ""}</div>
                                         </div>
                                         <hr />
                                         <div className="row mb-4">
@@ -128,7 +129,7 @@ function ProfileDetail() {
                                             <div className="col-9 profileInfo">{info ? info.personalDetail.address : ""}</div>
                                         </div>
                                         <div className="d-flex justify-content-between">
-                                            <a href="/update" className="btn btn-primary">Update Profile</a>
+                                            <Link to="/update" className="btn btn-primary">Update Profile</Link>
                                         </div>
                                     </div>
                                 </div>

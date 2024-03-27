@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import photo from "../../assets/static/images/faces/2.jpg"
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Profile() {
     const id = "ec8159d1-4388-4fb9-8b51-767b64273296";
@@ -85,8 +86,10 @@ function Profile() {
                                             <div className="col-9 profileInfo">{info ? info.personalDetail.address : ""}</div>
                                         </div>
                                         <div className="d-flex justify-content-between">
-                                            <a href="/update" className="btn btn-primary">Update Profile</a>
-                                            <a href="/detail" className="btn btn-secondary">Profile Details</a>
+                                            <Link to="/update" className="btn btn-primary">Update Profile</Link>
+                                            <Link to="/detail" className="btn btn-secondary">Profile Details</Link>
+                                            {/* <a href="/update" className="btn btn-primary">Update Profile</a>
+                                            <a href="/detail" className="btn btn-secondary">Profile Details</a> */}
                                         </div>
                                     </div>
                                 </div>
