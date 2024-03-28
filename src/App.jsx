@@ -9,6 +9,8 @@ import ProfileDetail from './components/ProfileDetail/ProfileDetail.jsx'
 import Profile from './components/Profile/Profile.jsx'
 import SidebarToggler from './components/SidebarToggler/SidebarToggler.jsx'
 import { useState } from 'react'
+import CompanyList from './components/CompanyList/CompanyList.jsx'
+import Error from './components/Error/Error.jsx'
 
 function App() {
   const [isActive, setIsActive] = useState(false);
@@ -26,6 +28,8 @@ function App() {
               <Route path="/" element={<Profile />} />
               <Route path="/update" element={<ProfileUpdate />} />
               <Route path="/detail" element={<ProfileDetail />} />
+              <Route path="/company-list" element={<CompanyList />} />
+              <Route path="*" element={<Error />} />
             </Routes>
           </div>
         </div>

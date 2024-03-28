@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import brandImage from '../../assets/static/images/logo/brand.png';
+import brandLight from '../../assets/static/images/logo/workwise.png';
+import brandDark from '../../assets/static/images/logo/workwisedark.png';
 import SidebarMenuItem from "./SidebarMenuItem";
 import SidebarSubMenu from "./SidebarSubMenu";
 
@@ -42,7 +43,7 @@ function Sidebar({ isActive, setIsActive }) {
                     <div className="sidebar-header position-relative">
                         <div className="d-flex justify-content-between align-items-center flex-column">
                             <div className="logo">
-                                <a href="/"><img src={brandImage} alt="brand" />
+                                <a href="/"><img src={brandLight} alt="brand" />
                                     WorkWise</a>
                             </div>
                             <div className="theme-toggle d-flex gap-2  align-items-center mt-2">
@@ -84,6 +85,7 @@ function Sidebar({ isActive, setIsActive }) {
                             <SidebarMenuItem to="/" label="Profile" icon="bi-person-fill" />
                             <SidebarMenuItem to="/update" label="Update" icon="bi-person-fill-gear" />
                             <SidebarMenuItem to="/detail" label="Detail" icon="bi-person-lines-fill" />
+                            <SidebarMenuItem to="/company-list" label="Companies" icon="bi-building-fill" />
                         </ul>
                     </div>
                 </div>

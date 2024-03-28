@@ -23424,6 +23424,11 @@ body .bi:before,
     height: 20px
 }
 
+.logo>a {
+    display: flex;
+    align-items: center;
+}
+
 .layout-horizontal .header-top-right {
     display: flex;
     gap: 1rem;
