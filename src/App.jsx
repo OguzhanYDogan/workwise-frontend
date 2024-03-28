@@ -16,25 +16,21 @@ function App() {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <BrowserRouter>
-      <div>
-        <Sidebar isActive={isActive} setIsActive={setIsActive} />
-        <div id="main">
-          <SidebarToggler isActive={isActive} setIsActive={setIsActive} />
-          <div id="app">
-            <div className='container'>
-            </div>
-            <Routes>
-              <Route path="/" element={<Profile />} />
-              <Route path="/update" element={<ProfileUpdate />} />
-              <Route path="/detail" element={<ProfileDetail />} />
-              <Route path="/company-list" element={<CompanyList />} />
-              <Route path="*" element={<Error />} />
-            </Routes>
-          </div>
+    <>
+      <Sidebar isActive={isActive} setIsActive={setIsActive} />
+      <div id="main">
+        <SidebarToggler isActive={isActive} setIsActive={setIsActive} />
+        <div id="app">
+          <Routes>
+            <Route path="/" element={<Profile />} />
+            <Route path="/update" element={<ProfileUpdate />} />
+            <Route path="/detail" element={<ProfileDetail />} />
+            <Route path="/company-list" element={<CompanyList />} />
+            <Route path="*" element={<Error />} />
+          </Routes>
         </div>
       </div>
-    </BrowserRouter>
+    </>
   )
 }
 
