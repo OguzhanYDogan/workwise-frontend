@@ -7,22 +7,22 @@ import isDesktop from '../helper/isDesktop'
 */
 const calculateChildrenHeight = (el, deep = false) => {
   const children = el.children
-  
+
   let height = 0
-  for(let i = 0; i < el.childElementCount; i++) {
+  for (let i = 0; i < el.childElementCount; i++) {
     const child = children[i]
     height += child.querySelector('.submenu-link').clientHeight
 
     // 2-level menu
-    if(deep && child.classList.contains('has-sub')) {
+    if (deep && child.classList.contains('has-sub')) {
       const subsubmenu = child.querySelector('.submenu')
 
-      if(subsubmenu.classList.contains('submenu-open')) {
-        const childrenHeight =  ~~[...subsubmenu.querySelectorAll('.submenu-link')].reduce((acc,curr) => acc + curr.clientHeight,0)
+      if (subsubmenu.classList.contains('submenu-open')) {
+        const childrenHeight = ~~[...subsubmenu.querySelectorAll('.submenu-link')].reduce((acc, curr) => acc + curr.clientHeight, 0)
         height += childrenHeight
       }
     }
-    
+
   }
   el.style.setProperty('--submenu-height', height + 'px')
   return height
@@ -47,13 +47,13 @@ class Sidebar {
     // add event listener to sidebar
     document
       .querySelectorAll(".burger-btn")
-      .forEach((el) => el.addEventListener("click", this.toggle.bind(this)))
+      .forEach((el) => el.addEventListener("onClick", this.toggle.bind(this)))
     document
       .querySelectorAll(".sidebar-hide")
-      .forEach((el) => el.addEventListener("click", this.toggle.bind(this)))
+      .forEach((el) => el.addEventListener("onClick", this.toggle.bind(this)))
     window.addEventListener("resize", this.onResize.bind(this))
 
-    
+
     const toggleSubmenu = (el) => {
       if (el.classList.contains("submenu-open")) {
         el.classList.remove('submenu-open')
@@ -61,16 +61,16 @@ class Sidebar {
       } else {
         el.classList.remove("submenu-closed")
         el.classList.add("submenu-open")
-      } 
+      }
     }
 
-    
+
 
 
     let sidebarItems = document.querySelectorAll(".sidebar-item.has-sub")
     for (var i = 0; i < sidebarItems.length; i++) {
       let sidebarItem = sidebarItems[i]
-      
+
       sidebarItems[i]
         .querySelector(".sidebar-link")
         .addEventListener("click", (e) => {
@@ -78,15 +78,15 @@ class Sidebar {
           let submenu = sidebarItem.querySelector(".submenu")
           toggleSubmenu(submenu)
         })
-      
-      
+
+
       // If submenu has submenu
-      const submenuItems = sidebarItem.querySelectorAll('.submenu-item.has-sub') 
+      const submenuItems = sidebarItem.querySelectorAll('.submenu-item.has-sub')
       submenuItems.forEach(item => {
         item.addEventListener('click', () => {
           const submenuLevelTwo = item.querySelector('.submenu')
           toggleSubmenu(submenuLevelTwo)
-          
+
           // Pass second .submenu
           const height = calculateChildrenHeight(item.parentElement, true)
 
@@ -109,9 +109,9 @@ class Sidebar {
 
   }
 
-  
 
-  
+
+
 
   /**
    * On Sidebar Rezise Event
@@ -186,7 +186,7 @@ class Sidebar {
    * Toggle Overflow Body
    */
   toggleOverflowBody(active) {
-    if(isDesktop(window)) return;
+    if (isDesktop(window)) return;
     const sidebarState = this.sidebarEL.classList.contains("active")
     const body = document.querySelector("body")
     if (typeof active == "undefined") {
@@ -203,7 +203,7 @@ class Sidebar {
       rect.top >= 0 &&
       rect.left >= 0 &&
       rect.bottom <=
-        (window.innerHeight || document.documentElement.clientHeight) &&
+      (window.innerHeight || document.documentElement.clientHeight) &&
       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     )
   }
@@ -223,7 +223,7 @@ let sidebarEl = document.getElementById("sidebar")
    * On First Load
    */
 const onFirstLoad = (sidebarEL) => {
-  if(!sidebarEl) return
+  if (!sidebarEl) return
   if (isDesktop(window)) {
     sidebarEL.classList.add("active")
     sidebarEL.classList.add('sidebar-desktop')
@@ -235,8 +235,8 @@ const onFirstLoad = (sidebarEL) => {
     let submenu = submenus[i]
     const sidebarItem = submenu.parentElement
     const height = submenu.clientHeight
-    
-    if(sidebarItem.classList.contains('active')) submenu.classList.add('submenu-open')
+
+    if (sidebarItem.classList.contains('active')) submenu.classList.add('submenu-open')
     else submenu.classList.add('submenu-closed')
     setTimeout(() => {
       const height = calculateChildrenHeight(submenu, true)
@@ -244,7 +244,7 @@ const onFirstLoad = (sidebarEL) => {
   }
 }
 
-if(document.readyState !== 'loading') {
+if (document.readyState !== 'loading') {
   onFirstLoad(sidebarEl)
 }
 else {

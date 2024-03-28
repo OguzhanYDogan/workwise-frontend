@@ -52,50 +52,39 @@ function ProfileUpdate() {
 
     return (
         <>
-            <div id="main">
-                <div id="app">
-                    <div className='container'>
-                        <header className="mb-3">
-                            <a href="#" className="burger-btn d-block d-xl-none">
-                                <i className="bi bi-justify fs-3"></i>
-                            </a>
-                        </header>
-                        <div className="row">
-                            <form onSubmit={handleSubmit}>
-                                <div className="col-12">
-                                    <div className="card">
-                                        <div className="card-body">
-                                            <div className="d-flex justify-content-center align-items-center mb-3">
-                                                <div className="avatar avatar-2xl">
-                                                    <img src={selectedImage ? selectedImage : photoExample} alt="Avatar" />
-                                                </div>
-                                            </div>
-                                            <label htmlFor="picture" className="form-label">Picture</label>
-                                            <input type="file" id="picture" name="picture" className="form-control" onChange={handleFileChange} />
-                                        </div>
+            <div className="row">
+                <form onSubmit={handleSubmit}>
+                    <div className="col-12">
+                        <div className="card">
+                            <div className="card-body">
+                                <div className="d-flex justify-content-center align-items-center mb-3">
+                                    <div className="avatar avatar-2xl">
+                                        <img src={selectedImage ? selectedImage : photoExample} alt="Avatar" />
                                     </div>
                                 </div>
-                                <div className="col-12">
-                                    <div className="card">
-                                        <div className="card-body">
-                                            <div className="mb-3">
-                                                <label htmlFor="phone" className="form-label">Phone</label>
-                                                <input type="text" name="phone" id="phone" className="form-control" placeholder="5xxxxxxxxx" value={phone} onChange={(e) => setPhone(e.target.value)} />
-                                            </div>
-                                            <div className="mb-4">
-                                                <label htmlFor="birthday" className="form-label">Address</label>
-                                                <textarea rows={6} name="birthday" id="birthday" className="form-control" placeholder="Your Address.." value={address} onChange={(e) => setAddress(e.target.value)} />
-                                            </div>
-                                            <div className="d-flex justify-content-between">
-                                                <button type="submit" className="btn btn-success">Save Changes</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                                <label htmlFor="picture" className="form-label">Picture</label>
+                                <input type="file" id="picture" name="picture" className="form-control" onChange={handleFileChange} />
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div className="col-12">
+                        <div className="card">
+                            <div className="card-body">
+                                <div className="mb-3">
+                                    <label htmlFor="phone" className="form-label">Phone</label>
+                                    <input type="text" name="phone" id="phone" className="form-control" placeholder="5xxxxxxxxx" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                                </div>
+                                <div className="mb-4">
+                                    <label htmlFor="birthday" className="form-label">Address</label>
+                                    <textarea rows={6} name="birthday" id="birthday" className="form-control" placeholder="Your Address.." value={address} onChange={(e) => setAddress(e.target.value)} />
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <button type="submit" className="btn btn-success">Save Changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </>
     );

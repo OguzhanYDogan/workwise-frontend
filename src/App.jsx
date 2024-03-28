@@ -7,18 +7,28 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ProfileUpdate from './components/ProfileUpdate/ProfileUpdate.jsx'
 import ProfileDetail from './components/ProfileDetail/ProfileDetail.jsx'
 import Profile from './components/Profile/Profile.jsx'
+import SidebarToggler from './components/SidebarToggler/SidebarToggler.jsx'
+import { useState } from 'react'
 
 function App() {
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <BrowserRouter>
       <div>
-        <Sidebar />
-        <Routes>
-          <Route path="/" element={<Profile />} />
-          <Route path="/update" element={<ProfileUpdate />} />
-          <Route path="/detail" element={<ProfileDetail />} />
-        </Routes>
+        <Sidebar isActive={isActive} setIsActive={setIsActive} />
+        <div id="main">
+          <SidebarToggler isActive={isActive} setIsActive={setIsActive} />
+          <div id="app">
+            <div className='container'>
+            </div>
+            <Routes>
+              <Route path="/" element={<Profile />} />
+              <Route path="/update" element={<ProfileUpdate />} />
+              <Route path="/detail" element={<ProfileDetail />} />
+            </Routes>
+          </div>
+        </div>
       </div>
     </BrowserRouter>
   )
