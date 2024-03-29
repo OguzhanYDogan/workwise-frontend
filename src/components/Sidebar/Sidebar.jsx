@@ -42,9 +42,9 @@ function Sidebar({ isActive, setIsActive }) {
                 <div className="sidebar-wrapper active">
                     <div className="sidebar-header position-relative">
                         <div className="d-flex justify-content-between align-items-center flex-column">
-                            <div className="logo">
+                            <div className="logo mb-2">
                                 <a href="/"><img src={brandLight} alt="brand" />
-                                    WorkWise</a>
+                                    <span className="pt-2">WorkWise</span></a>
                             </div>
                             <div className="theme-toggle d-flex gap-2  align-items-center mt-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -85,7 +85,7 @@ function Sidebar({ isActive, setIsActive }) {
                             <SidebarMenuItem to="/" label="Profile" icon="bi-person-fill" />
                             <SidebarMenuItem to="/update" label="Update" icon="bi-person-fill-gear" />
                             <SidebarMenuItem to="/detail" label="Detail" icon="bi-person-lines-fill" />
-                            <SidebarMenuItem to="/company-list" label="Companies" icon="bi-building-fill" />
+                            <SidebarMenuItem to="/company-list" label="Companies" icon="bi-buildings-fill" />
                         </ul>
                     </div>
                 </div>

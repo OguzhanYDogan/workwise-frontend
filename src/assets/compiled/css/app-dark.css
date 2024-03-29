@@ -11083,3 +11083,7 @@ html[data-bs-theme=dark] .is-invalid~.invalid-feedback,
 html[data-bs-theme=dark] .is-invalid~.invalid-tooltip {
     display: block
 }
+
+html[data-bs-theme=dark] .company-name {
+    color: var(--bs-link-color);
+}
