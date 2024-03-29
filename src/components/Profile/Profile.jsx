@@ -1,11 +1,11 @@
+import React from "react";
 import { useEffect, useState } from "react"
 import photo from "../../assets/static/images/faces/2.jpg"
 import axios from "axios";
 import { Link } from "react-router-dom";
-import SidebarToggler from "../SidebarToggler/SidebarToggler";
 
 function Profile() {
-    const id = "ec8159d1-4388-4fb9-8b51-767b64273296";
+    const id = "65342f61-6495-4d37-bc33-dda877e6e99e";
     const uri = "https://workwisewebapi.azurewebsites.net/api/user?id="
     const [info, setInfo] = useState(null);
 
@@ -32,7 +32,7 @@ function Profile() {
                         <div className="card-body">
                             <div className="d-flex justify-content-center align-items-center flex-column">
                                 <div className="avatar avatar-2xl">
-                                    <img src={photo} alt="Avatar" />
+                                    <img src={info ? info.personalDetail.filePath : ""} alt="Avatar" />
                                 </div>
                                 <h3 className="mt-3">{info ? info.personalDetail.firstName + " " + info.personalDetail.lastName : ""}</h3>
                                 <p className="text-small">{info ? info.personalDetail.profession : ""}</p>

@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import CompanyCard from "../CompanyCard/CompanyCard";
+import React from "react";
+import CompanyCard from "./CompanyCard";
 
 function CompanyList() {
     return (

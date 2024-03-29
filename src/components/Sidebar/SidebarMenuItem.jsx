@@ -1,3 +1,4 @@
+import React from "react";
 import { Link, useLocation } from 'react-router-dom';
 
 function SidebarMenuItem({ to, label, icon }) {
@@ -7,7 +8,7 @@ function SidebarMenuItem({ to, label, icon }) {
     return (
         <li className={`sidebar-item ${isActive ? 'active' : ''}`}>
             <Link to={to} className="sidebar-link">
-                <i className={`bi ${icon}`}></i>
+                <i className={`bi ${icon}`} style={{ fontSize: "1.3rem" }}></i>
                 <span>{label}</span>
             </Link>
         </li>

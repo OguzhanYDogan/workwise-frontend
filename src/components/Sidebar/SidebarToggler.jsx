@@ -1,3 +1,5 @@
+import React from "react";
+
 function SidebarToggler({ isActive, setIsActive }) {
     const toggleSidebar = (e) => {
         e.preventDefault();

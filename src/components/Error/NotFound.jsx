@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import errorimg from "../../assets/compiled/svg/error-404.svg";
 
-function Error() {
+function NotFound() {
     return (
         <>
             <div className="error-page container">
@@ -18,4 +18,4 @@ function Error() {
     );
 }
 
-export default Error;
+export default NotFound;

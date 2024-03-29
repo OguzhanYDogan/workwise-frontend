@@ -9961,14 +9961,14 @@ html[data-bs-theme=dark] .sidebar-wrapper .sidebar-toggler.x {
 
 html[data-bs-theme=dark] .sidebar-wrapper .menu {
     padding-left: 0;
-    margin-top: 2rem;
+    margin-top: 1rem;
     padding: 0 2rem;
     font-weight: 600
 }
 
 html[data-bs-theme=dark] .sidebar-wrapper .menu .sidebar-title {
     padding: 0 1rem;
-    margin: 1.5rem 0 1rem;
+    margin: 1rem 0 1rem;
     font-size: 1rem;
     list-style: none;
     font-weight: 600;

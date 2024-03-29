@@ -1,9 +1,11 @@
+import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import brandLight from '../../assets/static/images/logo/workwise.png';
 import brandDark from '../../assets/static/images/logo/workwisedark.png';
 import SidebarMenuItem from "./SidebarMenuItem";
 import SidebarSubMenu from "./SidebarSubMenu";
+import { Outlet } from "react-router-dom";
 
 function Sidebar({ isActive, setIsActive }) {
     const THEME_KEY = "theme";
@@ -43,8 +45,8 @@ function Sidebar({ isActive, setIsActive }) {
                     <div className="sidebar-header position-relative">
                         <div className="d-flex justify-content-between align-items-center flex-column">
                             <div className="logo mb-2">
-                                <a href="/"><img src={brandLight} alt="brand" />
-                                    <span className="pt-2">WorkWise</span></a>
+                                <a href="/"><img src={theme === "light" ? brandLight : brandDark} alt="brand" />
+                                    <span className="brand-name">WorkWise</span></a>
                             </div>
                             <div className="theme-toggle d-flex gap-2  align-items-center mt-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -83,13 +85,15 @@ function Sidebar({ isActive, setIsActive }) {
                         <ul className="menu">
                             <li className="sidebar-title">Menu</li>
                             <SidebarMenuItem to="/" label="Profile" icon="bi-person-fill" />
-                            <SidebarMenuItem to="/update" label="Update" icon="bi-person-fill-gear" />
-                            <SidebarMenuItem to="/detail" label="Detail" icon="bi-person-lines-fill" />
+                            <SidebarMenuItem to="/update" label="Update Profile" icon="bi-person-fill-gear" />
+                            <SidebarMenuItem to="/detail" label="Profile Details" icon="bi-person-lines-fill" />
                             <SidebarMenuItem to="/company-list" label="Companies" icon="bi-buildings-fill" />
+                            <SidebarMenuItem to="/company-add" label="Add Company" icon="bi-building-fill-add" />
                         </ul>
                     </div>
                 </div>
             </div>
+            <Outlet />
         </>
     );
 }
