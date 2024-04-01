@@ -46,37 +46,37 @@ function Profile() {
                     <div className="card">
                         <div className="card-body">
                             <div className="row mb-4">
-                                <div className="col-3 fw-bold">Name : </div>
+                                <div className="col-3 fw-bold">Name</div>
                                 <div className="col-9 profileInfo">{info ? info.personalDetail.firstName : ""}</div>
                             </div>
                             <hr />
                             <div className="row mb-4">
-                                <div className="col-3 fw-bold">Surname : </div>
+                                <div className="col-3 fw-bold">Surname</div>
                                 <div className="col-9 profileInfo">{info ? info.personalDetail.lastName : ""}</div>
                             </div>
                             <hr />
                             <div className="row mb-4">
-                                <div className="col-3 fw-bold">Email : </div>
+                                <div className="col-3 fw-bold">Email</div>
                                 <div className="col-9 profileInfo">{info ? info.email : ""}</div>
                             </div>
                             <hr />
                             <div className="row mb-4">
-                                <div className="col-3 fw-bold">Phone : </div>
+                                <div className="col-3 fw-bold">Phone</div>
                                 <div className="col-9 profileInfo">{info ? info.phoneNumber : ""}</div>
                             </div>
                             <hr />
                             <div className="row mb-4">
-                                <div className="col-3 fw-bold">Job : </div>
+                                <div className="col-3 fw-bold">Job</div>
                                 <div className="col-9 profileInfo">{info ? info.personalDetail.profession : ""}</div>
                             </div>
                             <hr />
                             <div className="row mb-4">
-                                <div className="col-3 fw-bold">Department : </div>
+                                <div className="col-3 fw-bold">Department</div>
                                 <div className="col-9 profileInfo">{info ? info.personalDetail.department : ""}</div>
                             </div>
                             <hr />
                             <div className="row mb-4">
-                                <div className="col-3 fw-bold">Address : </div>
+                                <div className="col-3 fw-bold">Address</div>
                                 <div className="col-9 profileInfo">{info ? info.personalDetail.address : ""}</div>
                             </div>
                             <div className="d-flex justify-content-between">
