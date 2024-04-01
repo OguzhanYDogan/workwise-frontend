@@ -77,6 +77,8 @@ function ProfileUpdate() {
     return (
         <>
             <div className="row">
+                <h1 className='fw-normal text-center'>Update Profile</h1>
+                <hr />
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <div className="col-12">
                         <div className="card">

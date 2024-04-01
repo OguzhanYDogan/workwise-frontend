@@ -27,6 +27,8 @@ function Profile() {
     return (
         <>
             <div className="row">
+                <h1 className='fw-normal text-center'>Profile</h1>
+                <hr />
                 <div className="col-12 col-lg-4">
                     <div className="card">
                         <div className="card-body">

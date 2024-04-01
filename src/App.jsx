@@ -14,6 +14,8 @@ import CompanyList from './components/Company/CompanyList.jsx'
 import CompanyAdd from './components/Company/CompanyAdd.jsx'
 import NotFound from "./components/Error/NotFound.jsx";
 import CompanyDetail from "./components/Company/CompanyDetail.jsx";
+import CompanyManagerAdd from "./components/Company/CompanyManagerAdd.jsx";
+import CompanyManagerList from "./components/Company/CompanyManagerList.jsx";
 
 function App() {
   const [isActive, setIsActive] = useState(false);
@@ -31,6 +33,8 @@ function App() {
             <Route path="/company-list" element={<CompanyList />} />
             <Route path="/company-detail/:id" element={<CompanyDetail />} />
             <Route path="/company-add" element={<CompanyAdd />} />
+            <Route path="/company-manager-add" element={<CompanyManagerAdd />} />
+            <Route path="/company-manager-list" element={<CompanyManagerList />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

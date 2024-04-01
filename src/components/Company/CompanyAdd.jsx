@@ -21,6 +21,8 @@ function CompanyAdd() {
     return (
         <>
             <div className="row match-height">
+                <h1 className='fw-normal text-center'>Create Company</h1>
+                <hr />
                 <div className="col-12">
                     <div className="card">
                         <div className="card-body">
@@ -36,9 +38,6 @@ function CompanyAdd() {
                 </div>
                 <div className="col-12">
                     <div className="card">
-                        <div className="card-header">
-                            <h4 className="card-title">Multiple Column</h4>
-                        </div>
                         <div className="card-content">
                             <div className="card-body">
                                 <form className="form">

@@ -1,11 +1,12 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import brandLight from '../../assets/static/images/logo/workwise.png';
 import brandDark from '../../assets/static/images/logo/workwisedark.png';
 import SidebarMenuItem from "./SidebarMenuItem";
 import SidebarSubMenu from "./SidebarSubMenu";
 import { Outlet } from "react-router-dom";
+import { BsFillPersonFill, BsPersonFillGear, BsBuildingsFill, BsFillPersonLinesFill, BsBuildingFillAdd, BsPeopleFill } from "react-icons/bs";
+import { FaUserTie } from "react-icons/fa6";
 
 function Sidebar({ isActive, setIsActive }) {
     const THEME_KEY = "theme";
@@ -84,11 +85,13 @@ function Sidebar({ isActive, setIsActive }) {
                     <div className="sidebar-menu">
                         <ul className="menu">
                             <li className="sidebar-title">Menu</li>
-                            <SidebarMenuItem to="/" label="Profile" icon="bi-person-fill" />
-                            <SidebarMenuItem to="/update" label="Update Profile" icon="bi-person-fill-gear" />
-                            <SidebarMenuItem to="/detail" label="Profile Details" icon="bi-person-lines-fill" />
-                            <SidebarMenuItem to="/company-list" label="Companies" icon="bi-buildings-fill" />
-                            <SidebarMenuItem to="/company-add" label="Add Company" icon="bi-building-fill-add" />
+                            <SidebarMenuItem to="/" label="Profile" icon={<BsFillPersonFill />} />
+                            <SidebarMenuItem to="/update" label="Update Profile" icon={<BsPersonFillGear />} />
+                            <SidebarMenuItem to="/detail" label="Profile Details" icon={<BsFillPersonLinesFill />} />
+                            <SidebarMenuItem to="/company-list" label="Companies" icon={<BsBuildingsFill />} />
+                            <SidebarMenuItem to="/company-add" label="Add Company" icon={<BsBuildingFillAdd />} />
+                            <SidebarMenuItem to="/company-manager-add" label="Add Manager" icon={<FaUserTie />} />
+                            <SidebarMenuItem to="/company-manager-list" label="Manager List" icon={<BsPeopleFill />} />
                         </ul>
                     </div>
                 </div>

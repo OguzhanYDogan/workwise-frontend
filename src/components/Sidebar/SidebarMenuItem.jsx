@@ -8,7 +8,7 @@ function SidebarMenuItem({ to, label, icon }) {
     return (
         <li className={`sidebar-item ${isActive ? 'active' : ''}`}>
             <Link to={to} className="sidebar-link">
-                <i className={`bi ${icon}`} style={{ fontSize: "1.3rem" }}></i>
+                <span style={{ fontSize: "1.3rem" }}>{icon}</span>
                 <span>{label}</span>
             </Link>
         </li>
