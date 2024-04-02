@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function ProfileDetail() {
-    const id = "65342f61-6495-4d37-bc33-dda877e6e99e";
+    const id = "5b3a2d28-8203-42bf-8429-ad9b2f567f78";
     const uri = "https://workwisewebapi.azurewebsites.net/api/user?id="
     const [info, setInfo] = useState(null);
 

@@ -10,7 +10,7 @@ function ProfileUpdate() {
     const [phone, setPhone] = useState("");
     const [photo, setPhoto] = useState(null);
     const [address, setAddress] = useState("");
-    const id = "65342f61-6495-4d37-bc33-dda877e6e99e";
+    const id = "5b3a2d28-8203-42bf-8429-ad9b2f567f78";
     const uri = "https://workwisewebapi.azurewebsites.net/api/user?id="
 
     useEffect(() => {
@@ -43,16 +43,6 @@ function ProfileUpdate() {
             reader.readAsDataURL(file);
         }
     };
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     const response = await axios.put(uri + id + "&PhoneNumber=" + phone + "&Address=" + address, {
-    //         //"Address": JSON.stringify(address),
-    //         "Picture": JSON.stringify(selectedImage)
-    //         // "PhoneNumber": JSON.stringify(phone)
-    //     });
-    //     alert("Güncellendi");
-    // }
 
     const handleSubmit = async (e) => {
         e.preventDefault();

@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CompanyCard from "./CompanyCard";
+import axios from "axios";
 
 function CompanyList() {
-    const number = 7;
-    const cards = [];
+    const [companies, setCompanies] = useState([]);
+    const uri = "https://workwisewebapi.azurewebsites.net/api/company"
 
-    for (let i = 1; i < number; i++) {
-        cards.push(<CompanyCard key={i} id={i} />);
+    useEffect(() => {
+        Get();
+    }, []);
+
+    async function Get() {
+        try {
+            const response = await axios.get(uri);
+            if (response.data) {
+                setCompanies(response.data);
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     }
+
     return (
         <>
             <div className="row">
                 <h1 className='fw-normal text-center'>Company List</h1>
                 <hr />
-                {cards}
+                {companies.map(x => <CompanyCard key={x.id} company={x} />)}
             </div>
         </>
     );
