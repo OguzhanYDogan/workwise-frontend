@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import photoExample from "../../assets/static/images/samples/building.jpg"
+import photoExample from "../../assets/static/images/logo/company.jpg"
 import axios from 'axios';
 
 function CompanyAdd() {

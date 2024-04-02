@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import photoExample from "../../assets/static/images/faces/2.jpg"
+import photoExample from "../../assets/static/images/logo/manager.jpg"
 import axios from 'axios';
 
 function CompanyManagerAdd() {
@@ -12,10 +12,10 @@ function CompanyManagerAdd() {
     const [lastName, setLastName] = useState("");
     const [secondLastName, setSecondLastName] = useState("");
     const [address, setAddress] = useState("");
-    const [birthDate, setBirthDate] = useState(""); // Varsayılan değer olarak geçerli tarih
+    const [birthDate, setBirthDate] = useState("");
     const [placeOfBirth, setPlaceOfBirth] = useState("");
-    const [startDate, setStartDate] = useState(""); // Varsayılan değer olarak geçerli tarih
-    const [endDate, setEndDate] = useState(""); // Varsayılan değer olarak geçerli tarih
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
     const [trIdentityNumber, setTrIdentityNumber] = useState("");
     const [profession, setProfession] = useState("");
     const [department, setDepartment] = useState("");
@@ -73,6 +73,7 @@ function CompanyManagerAdd() {
         formData.append("Picture", picture);
         formData.append("Status", status);
         formData.append("TRIdentityNumber", trIdentityNumber);
+        formData.append("CompanyId", companyId);
 
         try {
             const response = await axios.post(managerUri, formData, {
