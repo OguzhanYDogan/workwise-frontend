@@ -9,12 +9,12 @@ function CompanyManagerCard({ manager }) {
             <div className="card overflow-hidden company-card">
                 <div className="card-content">
                     <div className="card-body row p-0">
-                        <div className="col-sm-5 d-flex justify-content-center align-items-center">
-                            <img src={manager.personalDetail.filePath ?? managerSample} className="w-100 h-100 object-fit-cover ratio ratio-4x3"
+                        <div className="col-sm-5" style={{ aspectRatio: "4/3" }}>
+                            <img src={manager.personalDetail.filePath ?? managerSample} className="w-100 h-100 object-fit-cover"
                                 alt="singleminded" />
                         </div>
                         <div className='col-sm-7 d-flex'>
-                            <div className='mx-auto my-auto p-4'>
+                            <div className='ms-4 my-auto p-4'>
                                 <h3 className='fw-normal mb-4 company-name'>{manager.personalDetail.firstName + " " + (manager.personalDetail.secondName ?? "") + " " + manager.personalDetail.lastName + " " + (manager.personalDetail.secondLastName ?? "")}</h3>
                                 <div className="mb-3">
                                     <i className="bi bi-building-fill"></i><span className="ps-3">{manager.company.name}</span>
