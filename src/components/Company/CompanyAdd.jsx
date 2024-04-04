@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import photoExample from "../../assets/static/images/logo/company.jpg"
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 function CompanyAdd() {
     const uri = "https://workwisewebapi.azurewebsites.net/api/company";
@@ -19,6 +20,7 @@ function CompanyAdd() {
     const [email, setEmail] = useState("");
     const [numberOfEmployees, setNumberOfEmployees] = useState(0);
     const [status, setStatus] = useState(0);
+    const [errors, setErrors] = useState("");
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -36,6 +38,7 @@ function CompanyAdd() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrors("");
         const formData = new FormData();
         formData.append('Logo', logo);
         formData.append('Name', name);
@@ -61,7 +64,8 @@ function CompanyAdd() {
             console.log(response);
             alert("Company Added!");
         } catch (error) {
-            console.error('Error adding company:', error);
+            setErrors(error.response.data.errors);
+            toast.error("Error adding company!");
         }
     }
 
@@ -189,6 +193,62 @@ function CompanyAdd() {
                                 </div>
                             </div>
                         </div>
+                        {/* Validation Errors */}
+                        {errors.Logo && errors.Logo.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
+                        {errors.Name && errors.Name.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
+                        {errors.Title && errors.Title.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
+                        {errors.MersisNumber && errors.MersisNumber.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
+                        {errors.TaxNumber && errors.TaxNumber.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
+                        {errors.TaxAdministration && errors.TaxAdministration.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
+                        {errors.PhoneNumber && errors.PhoneNumber.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
+                        {errors.FoundingYear && errors.FoundingYear.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
+                        {errors.Address && errors.Address.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
+                        {errors.Email && errors.Email.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
+                        {errors.NumberOfEmployees && errors.NumberOfEmployees.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
                     </div>
                 </form>
             </div>

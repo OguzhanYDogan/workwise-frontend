@@ -3,13 +3,16 @@ import { useEffect, useState } from "react";
 import photoExample from "../../assets/static/images/faces/2.jpg"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 function ProfileUpdate() {
 
+    const navigate = useNavigate();
     const [selectedImage, setSelectedImage] = useState(null);
     const [phone, setPhone] = useState("");
     const [photo, setPhoto] = useState(null);
     const [address, setAddress] = useState("");
+    const [errors, setErrors] = useState("");
     const id = "5b3a2d28-8203-42bf-8429-ad9b2f567f78";
     const uri = "https://workwisewebapi.azurewebsites.net/api/user?id="
 
@@ -46,6 +49,7 @@ function ProfileUpdate() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrors("");
         const formData = new FormData();
         formData.append('PhoneNumber', phone);
         formData.append('Address', address);
@@ -57,10 +61,10 @@ function ProfileUpdate() {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            console.log(response);
-            alert("Güncellendi");
+            toast.success("Profile updated!");
         } catch (error) {
-            console.error('Error updating profile:', error);
+            setErrors(error.response.data.errors)
+            toast.error("Error updating profile");
         }
     }
 
@@ -99,6 +103,21 @@ function ProfileUpdate() {
                                 </div>
                             </div>
                         </div>
+                        {errors.PhoneNumber && errors.PhoneNumber.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
+                        {errors.Address && errors.Address.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
+                        {errors.Picture && errors.Picture.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
                     </div>
                 </form>
             </div>

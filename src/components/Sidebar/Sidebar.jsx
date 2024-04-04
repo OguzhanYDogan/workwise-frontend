@@ -8,9 +8,9 @@ import { Outlet } from "react-router-dom";
 import { BsFillPersonFill, BsPersonFillGear, BsBuildingsFill, BsFillPersonLinesFill, BsBuildingFillAdd, BsPeopleFill } from "react-icons/bs";
 import { FaUserTie } from "react-icons/fa6";
 
-function Sidebar({ isActive, setIsActive }) {
+function Sidebar({ isActive, setIsActive, theme, setTheme }) {
     const THEME_KEY = "theme";
-    const [theme, setTheme] = useState("light");
+
 
     useEffect(() => {
         const storedTheme = localStorage.getItem(THEME_KEY);
