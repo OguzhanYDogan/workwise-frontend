@@ -5,8 +5,10 @@ import brandDark from '../../assets/static/images/logo/workwisedark.png';
 import SidebarMenuItem from "./SidebarMenuItem";
 import SidebarSubMenu from "./SidebarSubMenu";
 import { Outlet } from "react-router-dom";
-import { BsFillPersonFill, BsPersonFillGear, BsBuildingsFill, BsFillPersonLinesFill, BsBuildingFillAdd, BsPeopleFill, BsFillPersonPlusFill } from "react-icons/bs";
+import { BsFillPersonFill, BsPersonFillGear, BsBuildingsFill, BsFillPersonLinesFill, BsBuildingFillAdd, BsPeopleFill } from "react-icons/bs";
 import { FaUserTie } from "react-icons/fa6";
+import { FaBlackTie } from "react-icons/fa";
+import { IoIosPeople } from "react-icons/io";
 
 function Sidebar({ isActive, setIsActive, theme, setTheme }) {
     const THEME_KEY = "theme";
@@ -91,8 +93,8 @@ function Sidebar({ isActive, setIsActive, theme, setTheme }) {
                             <SidebarMenuItem to="/company-list" label="Companies" icon={<BsBuildingsFill />} />
                             <SidebarMenuItem to="/company-add" label="Add Company" icon={<BsBuildingFillAdd />} />
                             <SidebarMenuItem to="/company-manager-add" label="Add Manager" icon={<FaUserTie />} />
-                            <SidebarMenuItem to="/company-manager-list" label="Manager List" icon={<BsPeopleFill />} />
-                            <SidebarMenuItem to="/personel-add" label="Add Personel" icon={<BsFillPersonPlusFill />} />
+                            <SidebarMenuItem to="/company-manager-list" label="Manager List" icon={<IoIosPeople />} />
+                            <SidebarMenuItem to="/personel-add" label="Add Personel" icon={<FaBlackTie />} />
                         </ul>
                     </div>
                 </div>
