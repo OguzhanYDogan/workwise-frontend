@@ -11,7 +11,6 @@ import CompanyManagerList from './CompanyManager/CompanyManagerList'
 import PersonelAdd from './Personel/PersonelAdd'
 import Sidebar from './Sidebar/Sidebar'
 import SidebarToggler from './Sidebar/SidebarToggler'
-import { ToastContainer } from 'react-toastify';
 import NotFound from './Error/NotFound'
 
 function Template({ theme, setTheme }) {
@@ -23,7 +22,7 @@ function Template({ theme, setTheme }) {
             <div id="main">
                 <SidebarToggler isActive={isActive} setIsActive={setIsActive} />
                 <div id="app">
-                    <ToastContainer theme={theme} hideProgressBar={false} />
+
                     <Routes>
                         <Route path="/" element={<Profile />} />
                         <Route path="/update" element={<ProfileUpdate />} />

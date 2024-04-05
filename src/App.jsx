@@ -11,12 +11,14 @@ import Login from "./components/Authentication/Login.jsx";
 import ForgotPassword from "./components/Authentication/ForgotPassword.jsx";
 import ResetPassword from "./components/Authentication/ResetPassword.jsx";
 import Template from "./components/Template.jsx";
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [theme, setTheme] = useState("light");
 
   return (
     <BrowserRouter>
+      <ToastContainer theme={theme} hideProgressBar={false} />
       <Routes>
         <Route path="/*" element={<Template theme={theme} setTheme={setTheme} />} />
         <Route path="/login" element={<Login theme={theme} setTheme={setTheme} />} />
