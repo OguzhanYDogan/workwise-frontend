@@ -4,21 +4,35 @@ body {
 
 #auth {
     height: 100vh;
-    overflow-x: hidden
+    overflow-x: hidden;
+    background-image: url("../png/login.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+    transition: 1s;
+}
+
+html[data-bs-theme=dark] #auth {
+    height: 100vh;
+    overflow-x: hidden;
+    background-image: url("../png/logindark.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+    transition: .8s;
 }
 
 #auth #auth-right {
     height: 100%;
-}
 
-#auth #auth-right img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 #auth #auth-left {
-    padding: 3rem
+    padding: 3rem;
+    height: 100%;
+    background-color: var(--bs-body-bg);
+    opacity: .94;
+    border-radius: 0 8% 8% 0;
 }
 
 #auth #auth-left .auth-title {
@@ -33,7 +47,7 @@ body {
 }
 
 #auth #auth-left .auth-logo {
-    margin-bottom: 2rem
+    margin-bottom: 1rem
 }
 
 #auth #auth-left .auth-logo img {
@@ -46,14 +60,23 @@ body {
     }
 }
 
+@media screen and (max-width: 990px) {
+    #auth #auth-left {
+        padding: 5rem;
+        border-radius: 0;
+    }
+}
+
 @media screen and (max-width: 767px) {
     #auth #auth-left {
-        padding: 5rem
+        padding: 5rem;
+        border-radius: 0;
     }
 }
 
 @media screen and (max-width: 576px) {
     #auth #auth-left {
-        padding: 5rem 3rem
+        padding: 5rem 3rem;
+        border-radius: 0;
     }
 }
