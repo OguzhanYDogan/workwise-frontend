@@ -9,7 +9,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: right;
-    transition: 1s;
+    transition: 1s ease-in-out;
 }
 
 html[data-bs-theme=dark] #auth {
@@ -19,7 +19,7 @@ html[data-bs-theme=dark] #auth {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: right;
-    transition: .8s;
+    transition: 1s ease-in-out;
 }
 
 #auth #auth-right {
@@ -60,7 +60,7 @@ html[data-bs-theme=dark] #auth {
     }
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 992px) {
     #auth #auth-left {
         padding: 5rem;
         border-radius: 0;
