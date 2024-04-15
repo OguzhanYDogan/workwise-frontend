@@ -1,19 +1,17 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import photo from "../../assets/static/images/faces/2.jpg"
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 function ProfileDetail() {
-    const id = "5b3a2d28-8203-42bf-8429-ad9b2f567f78";
     const uri = "https://workwisewebapi.azurewebsites.net/api/user?id="
     const [info, setInfo] = useState(null);
 
     useEffect(() => {
-        Get();
+        Get(localStorage.getItem("userId"));
     }, []);
 
-    async function Get() {
+    async function Get(id) {
         try {
             const response = await axios.get(uri + id);
             if (response.data && response.data.personalDetail) {

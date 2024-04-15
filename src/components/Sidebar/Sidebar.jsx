@@ -9,10 +9,12 @@ import { BsFillPersonFill, BsPersonFillGear, BsBuildingsFill, BsFillPersonLinesF
 import { FaUserTie } from "react-icons/fa6";
 import { FaBlackTie } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
+import { IoIosLogOut } from "react-icons/io";
+import { useNavigate } from "react-router-dom"
 
-function Sidebar({ isActive, setIsActive, theme, setTheme }) {
+function Sidebar({ isActive, setIsActive, theme, setTheme, isSiteOwner, isManager }) {
     const THEME_KEY = "theme";
-
+    const navigate = useNavigate();
 
     useEffect(() => {
         const storedTheme = localStorage.getItem(THEME_KEY);
@@ -39,6 +41,12 @@ function Sidebar({ isActive, setIsActive, theme, setTheme }) {
     const closeSidebar = (e) => {
         e.preventDefault();
         setIsActive(false);
+    }
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        localStorage.removeItem("token");
+        navigate("/login");
     }
 
     return (
@@ -90,13 +98,23 @@ function Sidebar({ isActive, setIsActive, theme, setTheme }) {
                             <SidebarMenuItem to="/" label="Profile" icon={<BsFillPersonFill />} />
                             <SidebarMenuItem to="/update" label="Update Profile" icon={<BsPersonFillGear />} />
                             <SidebarMenuItem to="/detail" label="Profile Details" icon={<BsFillPersonLinesFill />} />
-                            <SidebarMenuItem to="/company-list" label="Companies" icon={<BsBuildingsFill />} />
-                            <SidebarMenuItem to="/company-add" label="Add Company" icon={<BsBuildingFillAdd />} />
-                            <SidebarMenuItem to="/company-manager-add" label="Add Manager" icon={<FaUserTie />} />
-                            <SidebarMenuItem to="/company-manager-list" label="Manager List" icon={<IoIosPeople />} />
-                            <SidebarMenuItem to="/personel-add" label="Add Personel" icon={<FaBlackTie />} />
+                            {isSiteOwner ? <>
+                                <SidebarMenuItem to="/company-list" label="Companies" icon={<BsBuildingsFill />} />
+                                <SidebarMenuItem to="/company-add" label="Add Company" icon={<BsBuildingFillAdd />} />
+                                <SidebarMenuItem to="/company-manager-add" label="Add Manager" icon={<FaUserTie />} />
+                                <SidebarMenuItem to="/company-manager-list" label="Manager List" icon={<IoIosPeople />} />
+                            </> : ""}
+                            {isManager ?
+                                <SidebarMenuItem to="/personel-add" label="Add Personel" icon={<FaBlackTie />} />
+                                : ""}
                         </ul>
                     </div>
+                    <hr />
+                    <form className="d-flex mx-2 mt-auto" onSubmit={handleLogout}>
+                        <button className="btn btn-outline-danger border-0 px-2 fw-bold flex-grow-1" type="submit">
+                            <IoIosLogOut /> Log out
+                        </button>
+                    </form>
                 </div>
             </div>
             <Outlet />

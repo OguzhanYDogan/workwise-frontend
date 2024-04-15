@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import photoExample from "../../assets/static/images/faces/2.jpg"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 function ProfileUpdate() {
 
@@ -13,14 +13,13 @@ function ProfileUpdate() {
     const [photo, setPhoto] = useState(null);
     const [address, setAddress] = useState("");
     const [errors, setErrors] = useState("");
-    const id = "5b3a2d28-8203-42bf-8429-ad9b2f567f78";
     const uri = "https://workwisewebapi.azurewebsites.net/api/user?id="
 
     useEffect(() => {
-        Get();
+        Get(localStorage.getItem("userId"));
     }, []);
 
-    async function Get() {
+    async function Get(id) {
         try {
             const response = await axios.get(uri + id);
             if (response.data && response.data.personalDetail) {

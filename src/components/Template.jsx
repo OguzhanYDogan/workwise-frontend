@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Profile from './Profile/Profile'
 import ProfileUpdate from './Profile/ProfileUpdate'
@@ -12,37 +12,62 @@ import PersonelAdd from './Personel/PersonelAdd'
 import Sidebar from './Sidebar/Sidebar'
 import SidebarToggler from './Sidebar/SidebarToggler'
 import NotFound from './Error/NotFound'
+import { jwtDecode } from 'jwt-decode'
+import { useNavigate } from "react-router-dom"
 
 function Template({ theme, setTheme }) {
     const [isActive, setIsActive] = useState(false);
+    const [isManager, setIsManager] = useState(false);
+    const [isSiteOwner, setIsSiteOwner] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            navigate("/login");
+        } else {
+            const decoded = jwtDecode(token);
+            console.log(decoded);
+            localStorage.setItem("userId", decoded.Id);
+            if (decoded.Role === "CompanyManager") {
+                setIsManager(true);
+            }
+            if (decoded.Role === "SiteOwner") {
+                setIsSiteOwner(true);
+            }
+        }
+    }, []);
 
     return (
         <>
-            <Sidebar isActive={isActive} setIsActive={setIsActive} theme={theme} setTheme={setTheme} />
+            <Sidebar isActive={isActive} setIsActive={setIsActive} theme={theme} setTheme={setTheme} isSiteOwner={isSiteOwner} isManager={isManager} />
             <div id="main">
                 <SidebarToggler isActive={isActive} setIsActive={setIsActive} />
                 <div id="app">
-
                     <Routes>
                         <Route path="/" element={<Profile />} />
                         <Route path="/update" element={<ProfileUpdate />} />
                         <Route path="/detail" element={<ProfileDetail />} />
-                        <Route path="/company-list" element={<CompanyList />} />
-                        <Route path="/company-detail/:id" element={<CompanyDetail />} />
-                        <Route path="/company-add" element={<CompanyAdd />} />
-                        <Route path="/company-manager-add" element={<CompanyManagerAdd />} />
-                        <Route path="/company-manager-list" element={<CompanyManagerList />} />
-                        <Route path="/personel-add" element={<PersonelAdd />} />
+                        {isSiteOwner ? <>
+                            <Route path="/company-list" element={<CompanyList />} />
+                            <Route path="/company-detail/:id" element={<CompanyDetail />} />
+                            <Route path="/company-add" element={<CompanyAdd />} />
+                            <Route path="/company-manager-add" element={<CompanyManagerAdd />} />
+                            <Route path="/company-manager-list" element={<CompanyManagerList />} />
+                        </> : ""}
+                        {isManager ?
+                            <Route path="/personel-add" element={<PersonelAdd />} />
+                            : ""}
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </div>
                 <footer>
                     <hr />
-                    <div class="footer clearfix mb-0 text-muted">
-                        <div class="float-start">
+                    <div className="footer clearfix mb-0 text-muted">
+                        <div className="float-start">
                             <p>2024 © WorkWise</p>
                         </div>
-                        <div class="float-end">
+                        <div className="float-end">
                             <p>All Rights Reserved.</p>
                         </div>
                     </div>

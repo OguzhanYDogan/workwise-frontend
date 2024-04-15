@@ -1,13 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import brandLight from "../../assets/static/images/logo/workwise.png"
 import brandDark from "../../assets/static/images/logo/workwisedark.png"
 import loginImage from "../../assets/compiled/png/login.jpg"
 import { Link } from 'react-router-dom'
+import axios from 'axios';
+import { useNavigate } from "react-router-dom"
 
 function Login({ theme, setTheme }) {
 
     const THEME_KEY = "theme";
-
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         const storedTheme = localStorage.getItem(THEME_KEY);
@@ -15,7 +19,6 @@ function Login({ theme, setTheme }) {
             setTheme(storedTheme);
         } else {
             setTheme("light");
-
         }
         document.documentElement.setAttribute('data-bs-theme', theme)
         localStorage.setItem(THEME_KEY, "light");
@@ -30,6 +33,17 @@ function Login({ theme, setTheme }) {
     const toggleDarkTheme = () => {
         setTheme(theme === "dark" ? "light" : "dark");
     };
+
+    const loginUri = " https://workwisewebapi.azurewebsites.net/api/Auth/Login"
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const response = await axios.post(loginUri, {
+            email,
+            password
+        });
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+        navigate("/");
+    }
 
 
     return (
@@ -75,20 +89,20 @@ function Login({ theme, setTheme }) {
                             <h1 className="auth-title">Log in.</h1>
                             <p className="auth-subtitle mb-5">Log in with your email and password</p>
 
-                            <form action="index.html">
+                            <form onSubmit={handleSubmit}>
                                 <div className="form-group position-relative has-icon-left mb-4">
-                                    <input type="text" className="form-control form-control-lg" placeholder="Username" />
+                                    <input type="text" className="form-control form-control-lg" placeholder="Username" value={email} onChange={(e) => setEmail(e.target.value)} />
                                     <div className="form-control-icon">
                                         <i className="bi bi-person"></i>
                                     </div>
                                 </div>
                                 <div className="form-group position-relative has-icon-left mb-4">
-                                    <input type="password" className="form-control form-control-lg" placeholder="Password" />
+                                    <input type="password" className="form-control form-control-lg" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                                     <div className="form-control-icon">
                                         <i className="bi bi-shield-lock"></i>
                                     </div>
                                 </div>
-                                <button className="btn btn-primary btn-block btn-lg shadow-lg mt-3">Log in</button>
+                                <button type='submit' className="btn btn-primary btn-block btn-lg shadow-lg mt-3">Log in</button>
                             </form>
                             <div className="text-center mt-5 text-lg fs-4">
 

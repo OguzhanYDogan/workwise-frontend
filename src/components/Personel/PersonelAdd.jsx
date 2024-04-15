@@ -271,6 +271,11 @@ function PersonelAdd() {
                                 <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
                             </div>
                         ))}
+                        {errors.Picture && errors.Picture.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
                     </section>
                 </div>
             </form>
