@@ -50,7 +50,6 @@ function Template({ theme, setTheme }) {
                     <Routes>
                         {
                             isConfirmed ? (<>
-
                                 <Route path="/" element={<Profile />} />
                                 <Route path="/update" element={<ProfileUpdate />} />
                                 <Route path="/detail" element={<ProfileDetail />} />

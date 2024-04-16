@@ -24,9 +24,6 @@ function CompanyManagerList() {
     const number = 7;
     const cards = [];
 
-    // for (let i = 1; i < number; i++) {
-    //     cards.push(<CompanyManagerCard key={i} id={i} />);
-    // }
     return (
         <>
             <div className='row'>

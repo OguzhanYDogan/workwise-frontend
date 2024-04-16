@@ -42,7 +42,8 @@ function ForgotPassword({ theme, setTheme }) {
             toast.success("We have sent you a reset link. Please check your mailbox");
             navigate("/login");
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            toast.error("There is no such email in our database")
         }
     }
 
