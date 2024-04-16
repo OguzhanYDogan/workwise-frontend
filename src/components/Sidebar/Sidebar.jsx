@@ -46,6 +46,7 @@ function Sidebar({ isActive, setIsActive, theme, setTheme, isSiteOwner, isManage
     const handleLogout = (e) => {
         e.preventDefault();
         localStorage.removeItem("token");
+        localStorage.removeItem("userId");
         navigate("/login");
     }
 
@@ -92,7 +93,14 @@ function Sidebar({ isActive, setIsActive, theme, setTheme, isSiteOwner, isManage
                             </div>
                         </div>
                     </div>
-                    <div className="sidebar-menu">
+                    <hr />
+                    <form className="px-3 w-100 mb-3" onSubmit={handleLogout}>
+                        <button className="btn btn-outline-danger px-2 fw-bold w-100" type="submit">
+                            <span><IoIosLogOut /> </span>
+                            <span>Log out</span>
+                        </button>
+                    </form>
+                    <div className="sidebar-menu overflow-auto">
                         <ul className="menu">
                             <li className="sidebar-title">Menu</li>
                             <SidebarMenuItem to="/" label="Profile" icon={<BsFillPersonFill />} />
@@ -105,16 +113,11 @@ function Sidebar({ isActive, setIsActive, theme, setTheme, isSiteOwner, isManage
                                 <SidebarMenuItem to="/company-manager-list" label="Manager List" icon={<IoIosPeople />} />
                             </> : ""}
                             {isManager ?
-                                <SidebarMenuItem to="/personel-add" label="Add Personel" icon={<FaBlackTie />} />
+                                <SidebarMenuItem to="/personel-add" label="Add Employee" icon={<FaBlackTie />} />
                                 : ""}
                         </ul>
                     </div>
-                    <hr />
-                    <form className="d-flex mx-2 mt-auto" onSubmit={handleLogout}>
-                        <button className="btn btn-outline-danger border-0 px-2 fw-bold flex-grow-1" type="submit">
-                            <IoIosLogOut /> Log out
-                        </button>
-                    </form>
+
                 </div>
             </div>
             <Outlet />

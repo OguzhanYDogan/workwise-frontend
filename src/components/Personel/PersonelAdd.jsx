@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import photoExample from "../../assets/static/images/logo/manager.jpg"
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { jwtDecode } from 'jwt-decode';
 
 function PersonelAdd() {
+    const personelUri = "https://workwisewebapi.azurewebsites.net/api/employee";
     const [selectedImage, setSelectedImage] = useState(null);
-    const [companies, setCompanies] = useState([]);
     const [firstName, setFirstName] = useState("");
     const [secondName, setSecondName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -21,8 +22,9 @@ function PersonelAdd() {
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [picture, setPicture] = useState("");
-    const [companyId, setCompanyId] = useState("");
     const [status, setStatus] = useState(0);
+    const [companyId, setCompanyId] = useState(0);
+    const [salary, setSalary] = useState(0);
     const [errors, setErrors] = useState("");
 
     const handleFileChange = (event) => {
@@ -38,6 +40,12 @@ function PersonelAdd() {
             reader.readAsDataURL(file);
         }
     };
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        const decoded = jwtDecode(token);
+        setCompanyId(parseInt(decoded.CompanyId));
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -61,25 +69,27 @@ function PersonelAdd() {
         formData.append("TRIdentityNumber", trIdentityNumber);
         formData.append("CompanyId", companyId);
 
-        // try {
-        //     const response = await axios.post(managerUri, formData, {
-        //         headers: {
-        //             'Content-Type': 'multipart/form-data'
-        //         }
-        //     });
-        //     console.log(response);
-        //     toast.success("Manager Added!");
-        // } catch (error) {
-        //     setErrors(error.response.data.errors);
-        //     toast.error("Error adding manager");
-        // }
+        try {
+            const response = await axios.post(personelUri, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log(response);
+            toast.success("Personel Added!");
+        } catch (error) {
+            console.log(error);
+            toast.error("Error adding personel");
+            setErrors(error.response.data.errors);
+        }
     }
 
     return (
         <div className="row match-height">
-            <h1 className='fw-normal text-center'>Create Personel</h1>
+            <h1 className='fw-normal text-center'>Create Employee</h1>
             <hr />
             <form className="form" encType='multipart/form-data' onSubmit={handleSubmit}>
+                <input type="hidden" value={companyId} />
                 <div className="col-12">
                     <div className="card">
                         <div className="card-body">
@@ -88,7 +98,7 @@ function PersonelAdd() {
                                     <img src={selectedImage ? selectedImage : photoExample} alt="Avatar" />
                                 </div>
                             </div>
-                            <label htmlFor="picture" className="form-label">Personel Photo</label>
+                            <label htmlFor="picture" className="form-label">Employee Photo</label>
                             <input type="file" id="picture" name="picture" className="form-control" onChange={handleFileChange} />
                         </div>
                     </div>
@@ -183,7 +193,14 @@ function PersonelAdd() {
                                         <div className="form-group">
                                             <label htmlFor="email-id-column" className='form-label'>Email</label>
                                             <input type="email" id="email-id-column" className="form-control"
-                                                name="email-id-column" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                                name="email-id-column" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6 col-12">
+                                        <div className="form-group">
+                                            <label htmlFor="salary-column" className='form-label'>Salary</label>
+                                            <input type="number" id="salary-column" className="form-control"
+                                                placeholder="XXXXXXXXXXX" name="salary-column" value={salary} onChange={(e) => setSalary(e.target.value)} />
                                         </div>
                                     </div>
                                     <div className="form-group col-12">
@@ -211,6 +228,11 @@ function PersonelAdd() {
                     </div>
                     {/* Validation Errors */}
                     <section>
+                        {errors.Picture && errors.Picture.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
                         {errors.FirstName && errors.FirstName.map((error, index) => (
                             <div key={index} className="alert alert-light-danger color-danger">
                                 <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
@@ -231,7 +253,7 @@ function PersonelAdd() {
                                 <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
                             </div>
                         ))}
-                        {errors.Address && errors.Address.map((error, index) => (
+                        {errors.TRIdentityNumber && errors.TRIdentityNumber.map((error, index) => (
                             <div key={index} className="alert alert-light-danger color-danger">
                                 <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
                             </div>
@@ -246,6 +268,11 @@ function PersonelAdd() {
                                 <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
                             </div>
                         ))}
+                        {errors.Profession && errors.Profession.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
                         {errors.StartDate && errors.StartDate.map((error, index) => (
                             <div key={index} className="alert alert-light-danger color-danger">
                                 <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
@@ -256,22 +283,22 @@ function PersonelAdd() {
                                 <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
                             </div>
                         ))}
-                        {errors.TRIdentityNumber && errors.TRIdentityNumber.map((error, index) => (
-                            <div key={index} className="alert alert-light-danger color-danger">
-                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
-                            </div>
-                        ))}
-                        {errors.Profession && errors.Profession.map((error, index) => (
-                            <div key={index} className="alert alert-light-danger color-danger">
-                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
-                            </div>
-                        ))}
                         {errors.Department && errors.Department.map((error, index) => (
                             <div key={index} className="alert alert-light-danger color-danger">
                                 <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
                             </div>
                         ))}
                         {errors.Picture && errors.Picture.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
+                        {errors.Wage && errors.Wage.map((error, index) => (
+                            <div key={index} className="alert alert-light-danger color-danger">
+                                <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
+                            </div>
+                        ))}
+                        {errors.Address && errors.Address.map((error, index) => (
                             <div key={index} className="alert alert-light-danger color-danger">
                                 <i className="bi bi-exclamation-circle"></i> <span>{error}</span>
                             </div>

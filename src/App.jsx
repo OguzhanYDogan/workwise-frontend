@@ -23,7 +23,7 @@ function App() {
         <Route path="/*" element={<Template theme={theme} setTheme={setTheme} />} />
         <Route path="/login" element={<Login theme={theme} setTheme={setTheme} />} />
         <Route path="/forgot-password" element={<ForgotPassword theme={theme} setTheme={setTheme} />} />
-        <Route path="/reset-password" element={<ResetPassword theme={theme} setTheme={setTheme} />} />
+        <Route path="/reset-password/:id" element={<ResetPassword theme={theme} setTheme={setTheme} />} />
       </Routes>
     </BrowserRouter>
   )

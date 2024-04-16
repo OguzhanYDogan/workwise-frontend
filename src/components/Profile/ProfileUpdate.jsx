@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 function ProfileUpdate() {
 
     const navigate = useNavigate();
+    const id = localStorage.getItem("userId");
     const [selectedImage, setSelectedImage] = useState(null);
     const [phone, setPhone] = useState("");
     const [photo, setPhoto] = useState(null);
@@ -16,7 +17,7 @@ function ProfileUpdate() {
     const uri = "https://workwisewebapi.azurewebsites.net/api/user?id="
 
     useEffect(() => {
-        Get(localStorage.getItem("userId"));
+        Get(id);
     }, []);
 
     async function Get(id) {
@@ -62,8 +63,9 @@ function ProfileUpdate() {
             });
             toast.success("Profile updated!");
         } catch (error) {
-            setErrors(error.response.data.errors)
             toast.error("Error updating profile");
+            console.log(error);
+            setErrors(error.response.data.errors)
         }
     }
 

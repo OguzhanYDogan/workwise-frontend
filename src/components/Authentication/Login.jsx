@@ -5,12 +5,14 @@ import loginImage from "../../assets/compiled/png/login.jpg"
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom"
+import { toast } from 'react-toastify'
 
 function Login({ theme, setTheme }) {
 
     const THEME_KEY = "theme";
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errors, setErrors] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -37,12 +39,17 @@ function Login({ theme, setTheme }) {
     const loginUri = " https://workwisewebapi.azurewebsites.net/api/Auth/Login"
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await axios.post(loginUri, {
-            email,
-            password
-        });
-        localStorage.setItem("token", JSON.stringify(response.data.token));
-        navigate("/");
+        try {
+            const response = await axios.post(loginUri, {
+                email,
+                password
+            });
+            localStorage.setItem("token", JSON.stringify(response.data.token));
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+            toast.error("Incorrect email or password");
+        }
     }
 
 
@@ -91,13 +98,13 @@ function Login({ theme, setTheme }) {
 
                             <form onSubmit={handleSubmit}>
                                 <div className="form-group position-relative has-icon-left mb-4">
-                                    <input type="text" className="form-control form-control-lg" placeholder="Username" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                    <input type="email" className="form-control form-control-lg" placeholder="Username" value={email} onChange={(e) => setEmail(e.target.value)} required />
                                     <div className="form-control-icon">
                                         <i className="bi bi-person"></i>
                                     </div>
                                 </div>
                                 <div className="form-group position-relative has-icon-left mb-4">
-                                    <input type="password" className="form-control form-control-lg" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                    <input type="password" className="form-control form-control-lg" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                                     <div className="form-control-icon">
                                         <i className="bi bi-shield-lock"></i>
                                     </div>
@@ -105,7 +112,6 @@ function Login({ theme, setTheme }) {
                                 <button type='submit' className="btn btn-primary btn-block btn-lg shadow-lg mt-3">Log in</button>
                             </form>
                             <div className="text-center mt-5 text-lg fs-4">
-
                                 <p><Link to={"/forgot-password"} className="font-bold">Forgot password?</Link></p>
                             </div>
                         </div>
@@ -114,7 +120,6 @@ function Login({ theme, setTheme }) {
                         <div id="auth-right">
                         </div>
                     </div>
-                    {/* <img src={loginImage} className='h-100' alt="" /> */}
                 </div>
 
             </div>

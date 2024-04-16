@@ -78,6 +78,7 @@ function Profile() {
                                 <div className="col-9 profileInfo">{info ? info.personalDetail.address : ""}</div>
                             </div>
                             <div className="d-flex justify-content-between">
+                                <Link to={"/reset-password/" + localStorage.getItem("userId")} className="btn btn-danger">Reset Password</Link>
                                 <Link to="/update" className="btn btn-primary">Update Profile</Link>
                                 <Link to="/detail" className="btn btn-secondary">Profile Details</Link>
                             </div>

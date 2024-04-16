@@ -1,11 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import brandLight from "../../assets/static/images/logo/workwise.png"
 import brandDark from "../../assets/static/images/logo/workwisedark.png"
-import loginImage from "../../assets/compiled/png/login.jpg"
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom"
 
 function ResetPassword({ theme, setTheme }) {
+    const params = useParams();
+    const userId = params.id;
+    const navigate = useNavigate();
 
     const THEME_KEY = "theme";
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     useEffect(() => {
         const storedTheme = localStorage.getItem(THEME_KEY);
@@ -13,10 +21,10 @@ function ResetPassword({ theme, setTheme }) {
             setTheme(storedTheme);
         } else {
             setTheme("light");
-
         }
         document.documentElement.setAttribute('data-bs-theme', theme)
         localStorage.setItem(THEME_KEY, "light");
+
     }, []);
 
     useEffect(() => {
@@ -29,14 +37,35 @@ function ResetPassword({ theme, setTheme }) {
         setTheme(theme === "dark" ? "light" : "dark");
     };
 
+    const handleResetPassword = async (e) => {
+        const resetUri = "https://workwisewebapi.azurewebsites.net/api/Auth/ResetPassword"
+        e.preventDefault();
+        if (password !== confirmPassword) {
+            toast.error("Passwords don't matches!");
+        }
+        else {
+
+            try {
+                const response = await axios.post(resetUri, {
+                    userId,
+                    password
+                });
+                toast.success(response.data);
+                navigate("/");
+            } catch (error) {
+                toast.error("Invalid attempt");
+            }
+        }
+    }
+
     return (
         <>
             <div id="auth">
 
-                <div class="row h-100">
-                    <div class="col-lg-6 col-xl-5 col-12">
+                <div className="row h-100">
+                    <div className="col-lg-6 col-xl-5 col-12">
                         <div id="auth-left">
-                            <div class="auth-logo">
+                            <div className="auth-logo">
                                 <div className="logo mb-2">
                                     <a href="/"><img src={theme === "light" ? brandLight : brandDark} alt="brand" />
                                         <span className="brand-name fs-1 fw-bold">WorkWise</span></a>
@@ -70,27 +99,27 @@ function ResetPassword({ theme, setTheme }) {
                                     </path>
                                 </svg>
                             </div>
-                            <h1 class="auth-title">Reset Password</h1>
-                            <p class="auth-subtitle mb-5">Create a new password to login</p>
+                            <h1 className="auth-title">Reset Password</h1>
+                            <p className="auth-subtitle mb-5">Create a new password to login</p>
 
-                            <form action="index.html">
-                                <div class="form-group position-relative has-icon-left mb-4">
-                                    <input type="password" class="form-control form-control-xl" placeholder="New Password" />
-                                    <div class="form-control-icon">
-                                        <i class="bi bi-shield-lock"></i>
+                            <form onSubmit={handleResetPassword}>
+                                <div className="form-group position-relative has-icon-left mb-4">
+                                    <input type="password" className="form-control" placeholder="New Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                    <div className="form-control-icon">
+                                        <i className="bi bi-shield-lock"></i>
                                     </div>
                                 </div>
-                                <div class="form-group position-relative has-icon-left mb-4">
-                                    <input type="password" class="form-control form-control-xl" placeholder="Confirm New Password" />
-                                    <div class="form-control-icon">
-                                        <i class="bi bi-shield-lock"></i>
+                                <div className="form-group position-relative has-icon-left mb-4">
+                                    <input type="password" className="form-control" placeholder="Confirm New Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                                    <div className="form-control-icon">
+                                        <i className="bi bi-shield-lock"></i>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary btn-block btn-lg shadow-lg mt-3">Reset Password</button>
+                                <button className="btn btn-primary btn-block btn-lg shadow-lg mt-3">Reset Password</button>
                             </form>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-xl-7 d-none d-lg-block">
+                    <div className="col-lg-6 col-xl-7 d-none d-lg-block">
                         <div id="auth-right">
                         </div>
                     </div>
