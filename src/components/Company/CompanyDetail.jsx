@@ -6,7 +6,7 @@ import axios from 'axios';
 function CompanyDetail() {
     const params = useParams();
 
-    const uri = "https://workwisewebapi.azurewebsites.net/api/company/"
+    const uri = "https://workwiseappi.azurewebsites.net/api/company/"
     const [companyDetail, setCompanyDetail] = useState("");
 
     useEffect(() => {

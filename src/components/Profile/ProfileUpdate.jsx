@@ -14,7 +14,7 @@ function ProfileUpdate() {
     const [photo, setPhoto] = useState(null);
     const [address, setAddress] = useState("");
     const [errors, setErrors] = useState("");
-    const uri = "https://workwisewebapi.azurewebsites.net/api/user?id="
+    const uri = "https://workwiseappi.azurewebsites.net/api/user?id="
 
     useEffect(() => {
         Get(id);

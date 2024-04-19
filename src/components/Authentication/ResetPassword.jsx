@@ -38,7 +38,7 @@ function ResetPassword({ theme, setTheme }) {
     };
 
     const handleResetPassword = async (e) => {
-        const resetUri = "https://workwisewebapi.azurewebsites.net/api/Auth/ResetPassword"
+        const resetUri = "https://workwiseappi.azurewebsites.net/api/Auth/ResetPassword"
         e.preventDefault();
         if (password !== confirmPassword) {
             toast.error("Passwords don't matches!");
@@ -51,7 +51,9 @@ function ResetPassword({ theme, setTheme }) {
                     password
                 });
                 toast.success(response.data);
-                navigate("/");
+                localStorage.removeItem("token");
+                localStorage.removeItem("userId");
+                navigate("/login");
             } catch (error) {
                 toast.error("Invalid attempt");
             }

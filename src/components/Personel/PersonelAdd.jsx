@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { jwtDecode } from 'jwt-decode';
 
 function PersonelAdd() {
-    const personelUri = "https://workwisewebapi.azurewebsites.net/api/employee";
+    const personelUri = "https://workwiseappi.azurewebsites.net/api/employee";
     const [selectedImage, setSelectedImage] = useState(null);
     const [firstName, setFirstName] = useState("");
     const [secondName, setSecondName] = useState("");

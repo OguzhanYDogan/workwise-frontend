@@ -4,7 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 function CompanyAdd() {
-    const uri = "https://workwisewebapi.azurewebsites.net/api/company";
+    const uri = "https://workwiseappi.azurewebsites.net/api/company";
     const [selectedImage, setSelectedImage] = useState("");
     const [logo, setLogo] = useState("");
     const [name, setName] = useState("");

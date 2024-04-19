@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function CompanyManagerList() {
     const [managers, setManagers] = useState([]);
-    const uri = "https://workwisewebapi.azurewebsites.net/api/companymanager"
+    const uri = "https://workwiseappi.azurewebsites.net/api/companymanager"
 
     useEffect(() => {
         Get();

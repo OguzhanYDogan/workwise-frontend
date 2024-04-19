@@ -36,7 +36,7 @@ function Login({ theme, setTheme }) {
         setTheme(theme === "dark" ? "light" : "dark");
     };
 
-    const loginUri = " https://workwisewebapi.azurewebsites.net/api/Auth/Login"
+    const loginUri = "https://workwiseappi.azurewebsites.net/api/Auth/Login"
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Profile() {
-    const uri = "https://workwisewebapi.azurewebsites.net/api/user?id="
+    const uri = "https://workwiseappi.azurewebsites.net/api/user?id="
     const [info, setInfo] = useState(null);
 
     useEffect(() => {

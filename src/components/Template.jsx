@@ -14,13 +14,11 @@ import SidebarToggler from './Sidebar/SidebarToggler'
 import NotFound from './Error/NotFound'
 import { jwtDecode } from 'jwt-decode'
 import { useNavigate } from "react-router-dom"
-import ResetPassword from './Authentication/ResetPassword'
 
 function Template({ theme, setTheme }) {
     const [isActive, setIsActive] = useState(false);
     const [isManager, setIsManager] = useState(false);
     const [isSiteOwner, setIsSiteOwner] = useState(false);
-    const [isConfirmed, setIsConfirmed] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -29,14 +27,18 @@ function Template({ theme, setTheme }) {
             navigate("/login");
         } else {
             const decoded = jwtDecode(token);
-            console.log(decoded);
-            setIsConfirmed(decoded.IsConfirmed === "True")
             localStorage.setItem("userId", decoded.Id);
-            if (decoded.Role === "CompanyManager") {
-                setIsManager(true);
+            if (decoded.IsConfirmed === "False") {
+                navigate("/reset-password/" + decoded.Id);
             }
-            if (decoded.Role === "SiteOwner") {
-                setIsSiteOwner(true);
+            else {
+
+                if (decoded.Role === "CompanyManager") {
+                    setIsManager(true);
+                }
+                if (decoded.Role === "SiteOwner") {
+                    setIsSiteOwner(true);
+                }
             }
         }
     }, []);
@@ -48,25 +50,20 @@ function Template({ theme, setTheme }) {
                 <SidebarToggler isActive={isActive} setIsActive={setIsActive} />
                 <div id="app">
                     <Routes>
-                        {
-                            isConfirmed ? (<>
-                                <Route path="/" element={<Profile />} />
-                                <Route path="/update" element={<ProfileUpdate />} />
-                                <Route path="/detail" element={<ProfileDetail />} />
-                                {isSiteOwner ? <>
-                                    <Route path="/company-list" element={<CompanyList />} />
-                                    <Route path="/company-detail/:id" element={<CompanyDetail />} />
-                                    <Route path="/company-add" element={<CompanyAdd />} />
-                                    <Route path="/company-manager-add" element={<CompanyManagerAdd />} />
-                                    <Route path="/company-manager-list" element={<CompanyManagerList />} />
-                                </> : ""}
-                                {isManager ?
-                                    <Route path="/personel-add" element={<PersonelAdd />} />
-                                    : ""}
-                                <Route path="*" element={<NotFound />} />
-                            </>) :
-                                <Route path="*" element={<ResetPassword theme={theme} setTheme={setTheme} />} />
-                        }
+                        <Route path="/" element={<Profile />} />
+                        <Route path="/update" element={<ProfileUpdate />} />
+                        <Route path="/detail" element={<ProfileDetail />} />
+                        {isSiteOwner ? <>
+                            <Route path="/company-list" element={<CompanyList />} />
+                            <Route path="/company-detail/:id" element={<CompanyDetail />} />
+                            <Route path="/company-add" element={<CompanyAdd />} />
+                            <Route path="/company-manager-add" element={<CompanyManagerAdd />} />
+                            <Route path="/company-manager-list" element={<CompanyManagerList />} />
+                        </> : ""}
+                        {isManager ?
+                            <Route path="/personel-add" element={<PersonelAdd />} />
+                            : ""}
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                 </div>
                 <footer>

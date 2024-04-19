@@ -35,7 +35,7 @@ function ForgotPassword({ theme, setTheme }) {
     };
 
     const handleForgotPassword = async (e) => {
-        const forgotPasswordUri = "https://workwisewebapi.azurewebsites.net/api/employee/";
+        const forgotPasswordUri = "https://workwiseappi.azurewebsites.net/api/employee/";
         e.preventDefault();
         try {
             const response = await axios.post(forgotPasswordUri + email);

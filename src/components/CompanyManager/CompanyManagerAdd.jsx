@@ -4,8 +4,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 function CompanyManagerAdd() {
-    const companyUri = "https://workwisewebapi.azurewebsites.net/api/company";
-    const managerUri = "https://workwisewebapi.azurewebsites.net/api/companymanager";
+    const companyUri = "https://workwiseappi.azurewebsites.net/api/company";
+    const managerUri = "https://workwiseappi.azurewebsites.net/api/companymanager";
     const [selectedImage, setSelectedImage] = useState(null);
     const [companies, setCompanies] = useState([]);
     const [firstName, setFirstName] = useState("");
