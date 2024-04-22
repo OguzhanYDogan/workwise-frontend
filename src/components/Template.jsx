@@ -14,11 +14,14 @@ import SidebarToggler from './Sidebar/SidebarToggler'
 import NotFound from './Error/NotFound'
 import { jwtDecode } from 'jwt-decode'
 import { useNavigate } from "react-router-dom"
+import RequestForm from './Request/RequestForm'
+import RequestList from './Request/RequestList'
 
 function Template({ theme, setTheme }) {
     const [isActive, setIsActive] = useState(false);
     const [isManager, setIsManager] = useState(false);
     const [isSiteOwner, setIsSiteOwner] = useState(false);
+    const [isEmployee, setIsEmployee] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -39,13 +42,16 @@ function Template({ theme, setTheme }) {
                 if (decoded.Role === "SiteOwner") {
                     setIsSiteOwner(true);
                 }
+                if (decoded.Role === "Employee") {
+                    setIsEmployee(true);
+                }
             }
         }
     }, []);
 
     return (
         <>
-            <Sidebar isActive={isActive} setIsActive={setIsActive} theme={theme} setTheme={setTheme} isSiteOwner={isSiteOwner} isManager={isManager} />
+            <Sidebar isActive={isActive} setIsActive={setIsActive} theme={theme} setTheme={setTheme} isSiteOwner={isSiteOwner} isManager={isManager} isEmployee={isEmployee} />
             <div id="main">
                 <SidebarToggler isActive={isActive} setIsActive={setIsActive} />
                 <div id="app">
@@ -62,6 +68,12 @@ function Template({ theme, setTheme }) {
                         </> : ""}
                         {isManager ?
                             <Route path="/personel-add" element={<PersonelAdd />} />
+                            : ""}
+                        {isEmployee ?
+                            <>
+                                <Route path="/request-form" element={<RequestForm />} />
+                                <Route path="/request-list" element={<RequestList />} />
+                            </>
                             : ""}
                         <Route path="*" element={<NotFound />} />
                     </Routes>

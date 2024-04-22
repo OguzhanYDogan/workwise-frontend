@@ -6,13 +6,14 @@ import SidebarMenuItem from "./SidebarMenuItem";
 import SidebarSubMenu from "./SidebarSubMenu";
 import { Outlet } from "react-router-dom";
 import { BsFillPersonFill, BsPersonFillGear, BsBuildingsFill, BsFillPersonLinesFill, BsBuildingFillAdd, BsPeopleFill } from "react-icons/bs";
+import { FaWpforms } from "react-icons/fa6";
 import { FaUserTie } from "react-icons/fa6";
-import { FaBlackTie } from "react-icons/fa";
+import { FaTableList } from "react-icons/fa6";
 import { IoIosPeople } from "react-icons/io";
 import { IoIosLogOut } from "react-icons/io";
 import { useNavigate } from "react-router-dom"
 
-function Sidebar({ isActive, setIsActive, theme, setTheme, isSiteOwner, isManager }) {
+function Sidebar({ isActive, setIsActive, theme, setTheme, isSiteOwner, isManager, isEmployee }) {
     const THEME_KEY = "theme";
     const navigate = useNavigate();
 
@@ -93,16 +94,17 @@ function Sidebar({ isActive, setIsActive, theme, setTheme, isSiteOwner, isManage
                             </div>
                         </div>
                     </div>
-                    <hr />
-                    <form className="px-3 w-100 mb-3" onSubmit={handleLogout}>
-                        <button className="btn btn-outline-danger px-2 fw-bold w-100" type="submit">
-                            <span><IoIosLogOut /> </span>
-                            <span>Log out</span>
-                        </button>
-                    </form>
-                    <div className="sidebar-menu overflow-auto">
+                    <div className="sidebar-menu">
+                        <form className="px-3 w-100 my-4" onSubmit={handleLogout}>
+                            <button className={"btn btn-danger px-2 py-2 fw-bold w-100"} type="submit">
+                                <span><IoIosLogOut /> </span>
+                                <span>Log out</span>
+                            </button>
+                        </form>
+                        <div className="divider">
+                            <div className="divider-text">Menu</div>
+                        </div>
                         <ul className="menu">
-                            <li className="sidebar-title">Menu</li>
                             <SidebarMenuItem to="/" label="Profile" icon={<BsFillPersonFill />} />
                             <SidebarMenuItem to="/update" label="Update Profile" icon={<BsPersonFillGear />} />
                             <SidebarMenuItem to="/detail" label="Profile Details" icon={<BsFillPersonLinesFill />} />
@@ -114,6 +116,12 @@ function Sidebar({ isActive, setIsActive, theme, setTheme, isSiteOwner, isManage
                             </> : ""}
                             {isManager ?
                                 <SidebarMenuItem to="/personel-add" label="Add Employee" icon={<FaBlackTie />} />
+                                : ""}
+                            {isEmployee ?
+                                <>
+                                    <SidebarMenuItem to="/request-form" label="Request Form" icon={<FaWpforms />} />
+                                    <SidebarMenuItem to="/request-list" label="Request List" icon={<FaTableList />} />
+                                </>
                                 : ""}
                         </ul>
                     </div>

@@ -9394,7 +9394,7 @@ html[data-bs-theme=dark] .divider .divider-text {
     position: relative;
     display: inline-block;
     padding: 0 1rem;
-    background-color: #151521
+    background-color: #1e1e2d
 }
 
 html[data-bs-theme=dark] .divider .divider-text:before,
@@ -10614,7 +10614,8 @@ html[data-bs-theme=dark] .table td,
 html[data-bs-theme=dark] .dataTable-table td,
 html[data-bs-theme=dark] .table thead th,
 html[data-bs-theme=dark] .dataTable-table thead th {
-    vertical-align: middle !important
+    vertical-align: middle !important;
+    text-align: center;
 }
 
 html[data-bs-theme=dark] .table:not(.table-borderless) thead th,

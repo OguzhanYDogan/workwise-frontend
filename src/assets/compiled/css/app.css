@@ -23747,7 +23747,8 @@ body .bi:before,
 .dataTable-table td,
 .table thead th,
 .dataTable-table thead th {
-    vertical-align: middle !important
+    vertical-align: middle !important;
+    text-align: center;
 }
 
 .table:not(.table-borderless) thead th,
