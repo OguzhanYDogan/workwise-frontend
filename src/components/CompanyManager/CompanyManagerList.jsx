@@ -21,9 +21,6 @@ function CompanyManagerList() {
         }
     }
 
-    const number = 7;
-    const cards = [];
-
     return (
         <>
             <div className='row'>

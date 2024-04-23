@@ -5,13 +5,16 @@ import brandDark from '../../assets/static/images/logo/workwisedark.png';
 import SidebarMenuItem from "./SidebarMenuItem";
 import SidebarSubMenu from "./SidebarSubMenu";
 import { Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 import { BsFillPersonFill, BsPersonFillGear, BsBuildingsFill, BsFillPersonLinesFill, BsBuildingFillAdd, BsPeopleFill } from "react-icons/bs";
 import { FaWpforms } from "react-icons/fa6";
 import { FaUserTie } from "react-icons/fa6";
 import { FaTableList } from "react-icons/fa6";
 import { IoIosPeople } from "react-icons/io";
 import { IoIosLogOut } from "react-icons/io";
-import { useNavigate } from "react-router-dom"
+import { FaBlackTie } from "react-icons/fa";
+import { MdGroups } from "react-icons/md";
+import { MdOutlineRequestQuote } from "react-icons/md";
 
 function Sidebar({ isActive, setIsActive, theme, setTheme, isSiteOwner, isManager, isEmployee }) {
     const THEME_KEY = "theme";
@@ -115,7 +118,11 @@ function Sidebar({ isActive, setIsActive, theme, setTheme, isSiteOwner, isManage
                                 <SidebarMenuItem to="/company-manager-list" label="Manager List" icon={<IoIosPeople />} />
                             </> : ""}
                             {isManager ?
-                                <SidebarMenuItem to="/personel-add" label="Add Employee" icon={<FaBlackTie />} />
+                                <>
+                                    <SidebarMenuItem to="/employee-add" label="Add Employee" icon={<FaBlackTie />} />
+                                    <SidebarMenuItem to="/employee-list" label="Employee List" icon={<MdGroups />} />
+                                    <SidebarMenuItem to="/request-manage" label="Manage Requests" icon={<MdOutlineRequestQuote />} />
+                                </>
                                 : ""}
                             {isEmployee ?
                                 <>

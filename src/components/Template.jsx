@@ -8,7 +8,6 @@ import CompanyDetail from './Company/CompanyDetail'
 import CompanyAdd from './Company/CompanyAdd'
 import CompanyManagerAdd from './CompanyManager/CompanyManagerAdd'
 import CompanyManagerList from './CompanyManager/CompanyManagerList'
-import PersonelAdd from './Personel/PersonelAdd'
 import Sidebar from './Sidebar/Sidebar'
 import SidebarToggler from './Sidebar/SidebarToggler'
 import NotFound from './Error/NotFound'
@@ -16,6 +15,10 @@ import { jwtDecode } from 'jwt-decode'
 import { useNavigate } from "react-router-dom"
 import RequestForm from './Request/RequestForm'
 import RequestList from './Request/RequestList'
+import RequestManage from './Request/RequestManage'
+import EmployeeAdd from './Employee/EmployeeAdd'
+import EmployeeList from './Employee/EmployeeList'
+import EmployeeDetail from './Employee/EmployeeDetail'
 
 function Template({ theme, setTheme }) {
     const [isActive, setIsActive] = useState(false);
@@ -67,7 +70,12 @@ function Template({ theme, setTheme }) {
                             <Route path="/company-manager-list" element={<CompanyManagerList />} />
                         </> : ""}
                         {isManager ?
-                            <Route path="/personel-add" element={<PersonelAdd />} />
+                            <>
+                                <Route path="/employee-add" element={<EmployeeAdd />} />
+                                <Route path="/employee-list" element={<EmployeeList />} />
+                                <Route path="/employee-detail/:id" element={<EmployeeDetail />} />
+                                <Route path="/request-manage" element={<RequestManage />} />
+                            </>
                             : ""}
                         {isEmployee ?
                             <>

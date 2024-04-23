@@ -4,7 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { jwtDecode } from 'jwt-decode';
 
-function PersonelAdd() {
+function EmployeeAdd() {
     const personelUri = "https://workwiseappi.azurewebsites.net/api/employee";
     const [selectedImage, setSelectedImage] = useState(null);
     const [firstName, setFirstName] = useState("");
@@ -310,4 +310,4 @@ function PersonelAdd() {
     )
 }
 
-export default PersonelAdd
+export default EmployeeAdd

@@ -11088,3 +11088,12 @@ html[data-bs-theme=dark] .is-invalid~.invalid-tooltip {
 html[data-bs-theme=dark] .company-name {
     color: var(--bs-link-color);
 }
+
+html[data-bs-theme=dark] .popover-header {
+    background-color: rgba(var(--bs-body-bg-rgb));
+}
+
+html[data-bs-theme=dark] .popover-body {
+    background-color: rgba(var(--bs-body-bg-rgb));
+    color: var(--bs-body-color);
+}

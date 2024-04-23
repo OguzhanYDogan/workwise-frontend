@@ -1,6 +1,5 @@
 import React from 'react'
 import managerSample from "../../assets/static/images/logo/manager.jpg"
-import { Link } from 'react-router-dom'
 
 function CompanyManagerCard({ manager }) {
     return (

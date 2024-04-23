@@ -24153,6 +24153,26 @@ a {
     color: var(--bs-link-color);
 }
 
+.employee-name {
+    color: var(--bs-link-color);
+}
+
 .brand-name {
     padding-top: .8rem;
+}
+
+.popover-header {
+    background-color: rgba(var(--bs-body-bg-rgb));
+}
+
+.popover-body {
+    background-color: #fff;
+}
+
+[data-bs-theme=dark].popover-header {
+    background-color: var(--bs-card-bg);
+}
+
+[data-bs-theme=dark].popover-body {
+    background-color: var(--bs-card-bg);
 }
