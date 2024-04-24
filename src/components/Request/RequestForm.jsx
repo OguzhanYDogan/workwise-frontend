@@ -3,16 +3,80 @@ import ExpenseTypeSelector from './ExpenseTypeSelector';
 import AdvanceTypeSelector from './AdvanceTypeSelector';
 import LeaveTypeSelector from './LeaveTypeSelector';
 import requestBackground from '../../assets/compiled/svg/form.svg'
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 function RequestForm() {
+    const expenseUri = "https://workwiseappi.azurewebsites.net/api/expense/";
+    const advanceUri = "https://workwiseappi.azurewebsites.net/api/advance/";
     const [requestType, setRequestType] = useState("0");
     const [selectedExpenseType, setSelectedExpenseType] = useState(null);
+    const [expenseAmount, setExpenseAmount] = useState(0);
+    const [expenseCurrency, setExpenseCurrency] = useState("0");
+    const [file, setFile] = useState("");
     const [selectedAdvanceType, setSelectedAdvanceType] = useState(null);
+    const [advanceAmount, setAdvanceAmount] = useState(0);
+    const [advanceCurrency, setAdvanceCurrency] = useState("0");
+    const [description, setDescription] = useState("");
     const [selectedLeaveType, setSelectedLeaveType] = useState(null);
 
-    const handleExpenseRequest = async (e) => {
 
+    const handleExpenseRequest = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('Amount', parseInt(expenseAmount));
+        formData.append('Currency', parseInt(expenseCurrency));
+        formData.append('File', file);
+        formData.append('ExpenseType', parseInt(selectedExpenseType));
+        const userId = localStorage.getItem("userId");
+
+        try {
+            const response = await axios.post(expenseUri + userId, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            toast.success("Expense request submitted succesfully");
+        } catch (error) {
+            toast.error("Invalid Attempt")
+        }
     }
+
+    const handleAdvanceRequest = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('Amount', parseInt(advanceAmount));
+        formData.append('Currency', parseInt(advanceCurrency));
+        formData.append('Description', description);
+        formData.append('AdvanceType', parseInt(selectedAdvanceType));
+        const userId = localStorage.getItem("userId");
+
+        try {
+            const response = await axios.post(advanceUri + userId, {
+                "description": description,
+                "currency": parseInt(advanceCurrency),
+                "advanceType": parseInt(selectedAdvanceType),
+                "amount": advanceAmount
+            });
+            // ,
+            // {
+            //     description,
+            //     "currency": advanceCurrency,
+            //     "advanceType": selectedAdvanceType,
+            //     "amount": advanceAmount,
+            // });
+            console.log(response);
+            toast.success("Advance request submitted succesfully");
+        } catch (error) {
+            console.log(error);
+            toast.error("Invalid Attempt")
+        }
+    }
+
+    const handleFileChange = (event) => {
+        const uploaded = event.target.files[0];
+        setFile(uploaded);
+    };
 
     return (
         <>
@@ -42,7 +106,7 @@ function RequestForm() {
                 {/* Expense Request */}
                 {requestType === "1" &&
                     <>
-                        <form onSubmit={handleExpenseRequest}>
+                        <form onSubmit={handleExpenseRequest} encType='multipart/form-data'>
                             <div className="col-12">
                                 <div className="card">
                                     <div className="card-body">
@@ -63,19 +127,19 @@ function RequestForm() {
                                                     <div className='form-group'>
                                                         <label htmlFor="txtAmount" className='form-label'>Amount</label>
                                                         <div className="input-group mb-3">
-                                                            <input id='txtAmount' type="number" className='form-control' />
-                                                            <select className="form-select" id="inputGroupSelect01" style={{ maxWidth: "4rem" }}>
-                                                                <option value="1">₺</option>
-                                                                <option value="2">$</option>
-                                                                <option value="3">€</option>
+                                                            <input id='txtAmount' type="number" className='form-control' value={expenseAmount} onChange={(e) => setExpenseAmount(e.target.value)} />
+                                                            <select className="form-select" id="inputGroupSelect01" style={{ maxWidth: "4rem" }} value={expenseCurrency} onChange={(e) => setExpenseCurrency(e.target.value)}>
+                                                                <option value="0">₺</option>
+                                                                <option value="1">$</option>
+                                                                <option value="2">€</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="col-12">
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtAmount" className='form-label'>File</label>
-                                                        <input type="file" className='form-control' accept='.pdf .jpg .jpeg .png' />
+                                                        <label htmlFor="txtFile" className='form-label'>File</label>
+                                                        <input type="file" id='txtFile' className='form-control' accept='.pdf, .jpg, .jpeg, .png' onChange={handleFileChange} />
                                                     </div>
                                                 </div>
                                                 <div className="col-12 d-flex justify-content-between mt-3">
@@ -93,7 +157,7 @@ function RequestForm() {
                 {/* Advance Request */}
                 {requestType === "2" &&
                     <>
-                        <form>
+                        <form onSubmit={handleAdvanceRequest}>
                             <div className="col-12">
                                 <div className="card">
                                     <div className="card-body">
@@ -106,39 +170,37 @@ function RequestForm() {
                                 </div>
                             </div>
                             <div className="col-12">
-                                <form onSubmit={handleExpenseRequest}>
-                                    <div className="card">
-                                        <div className="card-content">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-12">
-                                                        <div className='form-group'>
-                                                            <label htmlFor="txtAmount" className='form-label'>Amount</label>
-                                                            <div className="input-group mb-3">
-                                                                <input id='txtAmount' type="number" className='form-control' />
-                                                                <select className="form-select" id="inputGroupSelect01" style={{ maxWidth: "4rem" }}>
-                                                                    <option value="1">₺</option>
-                                                                    <option value="2">$</option>
-                                                                    <option value="3">€</option>
-                                                                </select>
-                                                            </div>
+                                <div className="card">
+                                    <div className="card-content">
+                                        <div className="card-body">
+                                            <div className="row">
+                                                <div className="col-12">
+                                                    <div className='form-group'>
+                                                        <label htmlFor="txtAmount" className='form-label'>Amount</label>
+                                                        <div className="input-group mb-3">
+                                                            <input id='txtAmount' type="number" className='form-control' value={advanceAmount} onChange={(e) => setAdvanceAmount(e.target.value)} />
+                                                            <select className="form-select" id="inputGroupSelect01" style={{ maxWidth: "4rem" }} value={advanceCurrency} onChange={(e) => setAdvanceCurrency(e.target.value)}>
+                                                                <option value="0">₺</option>
+                                                                <option value="1">$</option>
+                                                                <option value="2">€</option>
+                                                            </select>
                                                         </div>
                                                     </div>
-                                                    <div className="col-12">
-                                                        <div className='form-group'>
-                                                            <label htmlFor="txtAmount" className='form-label'>Description</label>
-                                                            <textarea type="text" rows={3} className='form-control' accept='.pdf' />
-                                                        </div>
+                                                </div>
+                                                <div className="col-12">
+                                                    <div className='form-group'>
+                                                        <label htmlFor="txtAmount" className='form-label'>Description</label>
+                                                        <textarea type="text" rows={3} className='form-control' accept='.pdf' value={description} onChange={(e) => setDescription(e.target.value)} />
                                                     </div>
-                                                    <div className="col-12 d-flex justify-content-between mt-3">
-                                                        <button type="reset" className="btn btn-light-danger me-1 mb-1 px-3">Reset</button>
-                                                        <button type="submit" className="btn btn-primary me-1 mb-1 px-3">Submit</button>{" "}
-                                                    </div>
+                                                </div>
+                                                <div className="col-12 d-flex justify-content-between mt-3">
+                                                    <button type="reset" className="btn btn-light-danger me-1 mb-1 px-3">Reset</button>
+                                                    <button type="submit" className="btn btn-primary me-1 mb-1 px-3">Submit</button>{" "}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </form>
                     </>

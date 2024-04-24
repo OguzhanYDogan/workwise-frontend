@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import brandLight from '../../assets/static/images/logo/workwise.png';
 import brandDark from '../../assets/static/images/logo/workwisedark.png';
 import SidebarMenuItem from "./SidebarMenuItem";
-import SidebarSubMenu from "./SidebarSubMenu";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 import { BsFillPersonFill, BsPersonFillGear, BsBuildingsFill, BsFillPersonLinesFill, BsBuildingFillAdd, BsPeopleFill } from "react-icons/bs";
 import { FaWpforms } from "react-icons/fa6";
@@ -15,10 +14,24 @@ import { IoIosLogOut } from "react-icons/io";
 import { FaBlackTie } from "react-icons/fa";
 import { MdGroups } from "react-icons/md";
 import { MdOutlineRequestQuote } from "react-icons/md";
+import axios from "axios";
 
 function Sidebar({ isActive, setIsActive, theme, setTheme, isSiteOwner, isManager, isEmployee }) {
     const THEME_KEY = "theme";
     const navigate = useNavigate();
+    const [info, setInfo] = useState("");
+    const uri = "https://workwiseappi.azurewebsites.net/api/user?id="
+
+    async function Get(id) {
+        try {
+            const response = await axios.get(uri + id);
+            if (response.data && response.data.personalDetail) {
+                setInfo(response.data);
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
 
     useEffect(() => {
         const storedTheme = localStorage.getItem(THEME_KEY);
@@ -30,6 +43,7 @@ function Sidebar({ isActive, setIsActive, theme, setTheme, isSiteOwner, isManage
         }
         document.documentElement.setAttribute('data-bs-theme', theme)
         localStorage.setItem(THEME_KEY, "light");
+        Get(localStorage.getItem("userId"));
     }, []);
 
     useEffect(() => {
@@ -98,7 +112,24 @@ function Sidebar({ isActive, setIsActive, theme, setTheme, isSiteOwner, isManage
                         </div>
                     </div>
                     <div className="sidebar-menu">
-                        <form className="px-3 w-100 my-4" onSubmit={handleLogout}>
+                        {info &&
+                            <Link to={"/detail"}>
+                                <div className="card mb-2">
+                                    <div className="card-body py-3 ps-3">
+                                        <div className="d-flex align-items-center">
+                                            <div className="avatar avatar-lg">
+                                                <img src={info ? info.personalDetail.filePath : ""} alt="Face 1" />
+                                            </div>
+                                            <div className="ms-3 name">
+                                                <div className="fw-bold" style={{ fontSize: "1.2rem" }}>{info ? info.personalDetail.firstName + " " + info.personalDetail.lastName : ""}</div>
+                                                <div className="text-muted mb-0" style={{ fontSize: ".8rem" }}>{info ? info.email : ""}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                        }
+                        <form className="px-3 w-100 mb-3" onSubmit={handleLogout}>
                             <button className={"btn btn-danger px-2 py-2 fw-bold w-100"} type="submit">
                                 <span><IoIosLogOut /> </span>
                                 <span>Log out</span>

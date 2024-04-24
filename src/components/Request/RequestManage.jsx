@@ -1,9 +1,19 @@
 import React from 'react'
 import { BsFileEarmarkText } from 'react-icons/bs'
-import managerSample from "../../assets/static/images/logo/manager.jpg"
 import EmployeeAvatar from './EmployeeAvatar'
+import { FaCheck } from "react-icons/fa6";
+import { FaTimes } from 'react-icons/fa';
 
 function RequestManage() {
+
+    const handleCancel = async (id) => {
+
+    }
+
+    const handleApprove = async (id) => {
+
+    }
+
     return (
         <>
             {/* Expense Card */}
@@ -24,6 +34,7 @@ function RequestManage() {
                                             <th>Approval Status</th>
                                             <th>Response Date</th>
                                             <th>File</th>
+                                            <th>Approval</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -40,6 +51,20 @@ function RequestManage() {
                                             <td><span className='badge bg-warning'>Pending</span></td>
                                             <td>-</td>
                                             <td><a href="#" style={{ fontSize: "1.5rem" }}><BsFileEarmarkText /></a></td>
+                                            <td>
+                                                <div className='row'>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleCancel("1")}>
+                                                            <button className='btn text-success'><FaCheck /></button>
+                                                        </form>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleCancel("1")}>
+                                                            <button className='btn text-danger'><FaTimes /></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -54,6 +79,20 @@ function RequestManage() {
                                             <td><span className='badge bg-success'>Approved</span></td>
                                             <td>-</td>
                                             <td><a href="#" style={{ fontSize: "1.5rem" }}><BsFileEarmarkText /></a></td>
+                                            <td>
+                                                <div className='row'>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleCancel("1")}>
+                                                            <button className='btn text-success'><FaCheck /></button>
+                                                        </form>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleCancel("1")}>
+                                                            <button className='btn text-danger'><FaTimes /></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -68,6 +107,20 @@ function RequestManage() {
                                             <td><span className='badge bg-danger'>Rejected</span></td>
                                             <td>-</td>
                                             <td><a href="#" style={{ fontSize: "1.5rem" }}><BsFileEarmarkText /></a></td>
+                                            <td>
+                                                <div className='row'>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleCancel("1")}>
+                                                            <button className='btn text-success'><FaCheck /></button>
+                                                        </form>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleCancel("1")}>
+                                                            <button className='btn text-danger'><FaTimes /></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -94,6 +147,7 @@ function RequestManage() {
                                             <th>Approval Status</th>
                                             <th>Response Date</th>
                                             <th>Description</th>
+                                            <th>Approval</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -110,6 +164,20 @@ function RequestManage() {
                                             <td><span className='badge bg-warning'>Pending</span></td>
                                             <td>-</td>
                                             <td>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</td>
+                                            <td>
+                                                <div className='row'>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleApprove("1")}>
+                                                            <button className='btn text-success'><FaCheck /></button>
+                                                        </form>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleCancel("1")}>
+                                                            <button className='btn text-danger'><FaTimes /></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -124,6 +192,20 @@ function RequestManage() {
                                             <td><span className='badge bg-warning'>Pending</span></td>
                                             <td>-</td>
                                             <td>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</td>
+                                            <td>
+                                                <div className='row'>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleApprove("1")}>
+                                                            <button className='btn text-success'><FaCheck /></button>
+                                                        </form>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleCancel("1")}>
+                                                            <button className='btn text-danger'><FaTimes /></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -138,6 +220,20 @@ function RequestManage() {
                                             <td><span className='badge bg-warning'>Pending</span></td>
                                             <td>-</td>
                                             <td>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</td>
+                                            <td>
+                                                <div className='row'>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleApprove("1")}>
+                                                            <button className='btn text-success'><FaCheck /></button>
+                                                        </form>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleCancel("1")}>
+                                                            <button className='btn text-danger'><FaTimes /></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -152,6 +248,20 @@ function RequestManage() {
                                             <td><span className='badge bg-warning'>Pending</span></td>
                                             <td>-</td>
                                             <td>Lorem Ipsum Lorem Ipsum</td>
+                                            <td>
+                                                <div className='row'>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleApprove("1")}>
+                                                            <button className='btn text-success'><FaCheck /></button>
+                                                        </form>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleCancel("1")}>
+                                                            <button className='btn text-danger'><FaTimes /></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -178,6 +288,7 @@ function RequestManage() {
                                             <th>Number of Days</th>
                                             <th>Approval Status</th>
                                             <th>Response Date</th>
+                                            <th>Approval</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -194,6 +305,20 @@ function RequestManage() {
                                             <td>5</td>
                                             <td><span className='badge bg-warning'>Pending</span></td>
                                             <td>-</td>
+                                            <td>
+                                                <div className='row'>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleApprove("1")}>
+                                                            <button className='btn text-success'><FaCheck /></button>
+                                                        </form>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleCancel("1")}>
+                                                            <button className='btn text-danger'><FaTimes /></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -208,6 +333,20 @@ function RequestManage() {
                                             <td>5</td>
                                             <td><span className='badge bg-warning'>Pending</span></td>
                                             <td>-</td>
+                                            <td>
+                                                <div className='row'>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleApprove("1")}>
+                                                            <button className='btn text-success'><FaCheck /></button>
+                                                        </form>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleCancel("1")}>
+                                                            <button className='btn text-danger'><FaTimes /></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -222,6 +361,20 @@ function RequestManage() {
                                             <td>5</td>
                                             <td><span className="badge bg-success">Active</span></td>
                                             <td>-</td>
+                                            <td>
+                                                <div className='row'>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleApprove("1")}>
+                                                            <button className='btn text-success'><FaCheck /></button>
+                                                        </form>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleCancel("1")}>
+                                                            <button className='btn text-danger'><FaTimes /></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -236,6 +389,20 @@ function RequestManage() {
                                             <td>5</td>
                                             <td><span className='badge bg-warning'>Pending</span></td>
                                             <td>-</td>
+                                            <td>
+                                                <div className='row'>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleApprove("1")}>
+                                                            <button className='btn text-success'><FaCheck /></button>
+                                                        </form>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <form onSubmit={() => handleCancel("1")}>
+                                                            <button className='btn text-danger'><FaTimes /></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

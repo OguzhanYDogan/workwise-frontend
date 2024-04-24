@@ -2,11 +2,12 @@ import React from 'react'
 
 function AdvanceTypeSelector({ selectedAdvanceType, setSelectedAdvanceType }) {
     const advanceTypes = ["Individual", "Institutional"]
+
     return (
         <div className='row'>
             {advanceTypes.map((name, index) => (
-                <div className='col-md-6'>
-                    <div className="form-check mb-2" key={index}>
+                <div className='col-md-6' key={index}>
+                    <div className="form-check mb-2">
                         <input
                             className="form-check-input"
                             type="radio"

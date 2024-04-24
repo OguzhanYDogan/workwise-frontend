@@ -6,8 +6,8 @@ const ExpenseTypeSelector = ({ selectedExpenseType, setSelectedExpenseType }) =>
   return (
     <div className='row'>
       {expenseTypes.map((name, index) => (
-        <div className='col-md-6 col-lg-4 col-xl-3'>
-          <div className="form-check mb-2" key={index}>
+        <div className='col-md-6 col-lg-4 col-xl-3' key={index}>
+          <div className="form-check mb-2" >
             <input
               className="form-check-input"
               type="radio"

@@ -24,7 +24,7 @@ function EmployeeList() {
 
     return (
         <div className='row'>
-            <h1 className='fw-normal text-center'>Company Managers</h1>
+            <h1 className='fw-normal text-center'>Company Employees</h1>
             <hr />
             {employees.map(x => <EmployeeCard key={x.id} employee={x} />)}
         </div>
