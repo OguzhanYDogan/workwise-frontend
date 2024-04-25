@@ -7,11 +7,14 @@ import { toast } from 'react-toastify';
 function RequestList() {
     const expenseUri = "https://workwiseappi.azurewebsites.net/api/expense/";
     const advanceUri = "https://workwiseappi.azurewebsites.net/api/advance/";
+    const leaveUri = "https://workwiseappi.azurewebsites.net/api/leave/";
     const expenseTypes = ["Housing", "Travel", "FoodAndDrinks", "Materials", "Education", "Health", "Fuel"];
     const advanceTypes = ["Individual", "Institutional"];
+    const leaveTypes = ["Annual", "Unpaid", "Excuse", "Sick", "Special", "LongTerm", "Medical", "Maternity", "Marriage", "Bereavement"];
     const currencyType = ["₺", "$", "€"];
     const [expenses, setExpenses] = useState([]);
     const [advances, setAdvances] = useState([]);
+    const [leaves, setLeaves] = useState([]);
     const userId = localStorage.getItem("userId");
 
     useEffect(() => {
@@ -21,8 +24,6 @@ function RequestList() {
     async function Get(id) {
         try {
             const response = await axios.get(expenseUri + id);
-            console.log(response);
-            console.log(response.data);
             setExpenses(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -30,28 +31,29 @@ function RequestList() {
 
         try {
             const response = await axios.get(advanceUri + id);
-            console.log(response);
-            console.log(response.data);
             setAdvances(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+
+        try {
+            const response = await axios.get(leaveUri + id);
+            setLeaves(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     }
 
     const handleExpenseCancel = async (e, index, id) => {
+        console.log(id);
         const formData = new FormData();
         formData.append("expenseId", id);
         e.preventDefault();
         try {
-            const response = await axios.put(expenseUri + userId, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
+            const response = await axios.put(expenseUri + userId, formData);
             toast.success("Expense request cancelled");
-            // Update the approval status in the expenses array
             const updatedExpenses = [...expenses];
-            updatedExpenses[index].approvalStatus = "3";
+            updatedExpenses[index].approvalStatus = 3;
             setExpenses(updatedExpenses);
         } catch (error) {
             toast.error("Something went wrong");
@@ -71,8 +73,28 @@ function RequestList() {
             });
             toast.success("Advance request cancelled");
             const updatedAdvances = [...advances];
-            updatedAdvances[index].approvalStatus = "3";
+            updatedAdvances[index].approvalStatus = 3;
             setAdvances(updatedAdvances);
+        } catch (error) {
+            toast.error("Something went wrong");
+            console.log(error);
+        }
+    }
+
+    const handleLeaveCancel = async (e, index, id) => {
+        const formData = new FormData();
+        formData.append("leaveId", id);
+        e.preventDefault();
+        try {
+            const response = await axios.put(leaveUri + userId, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            toast.success("Leave request cancelled");
+            const updatedLeaves = [...leaves];
+            updatedLeaves[index].approvalStatus = 3;
+            setLeaves(updatedLeaves);
         } catch (error) {
             toast.error("Something went wrong");
             console.log(error);
@@ -123,7 +145,7 @@ function RequestList() {
                                                 <td><a href={expense.filePath ?? ""} target='_blank' style={{ fontSize: "1.5rem" }}><BsFileEarmarkText /></a></td>
                                                 <td>
                                                     <form onSubmit={(e) => handleExpenseCancel(e, index, expense.id)}>
-                                                        <button className='btn text-danger'><FaTimes /></button>
+                                                        <button className='btn btn-danger' disabled={expense.approvalStatus != "0"}><FaTimes /></button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -162,21 +184,22 @@ function RequestList() {
                                                 <td>{advanceTypes[advance.advanceType]}</td>
                                                 <td>{advance.amount}</td>
                                                 <td>{currencyType[advance.currency]}</td>
-                                                <td>{
-                                                    advance.approvalStatus == "0"
-                                                        ? <span className='badge bg-warning'>Pending</span> :
-                                                        advance.approvalStatus == "1" ?
-                                                            <span className='badge bg-success'>Approved</span>
-                                                            : advance.approvalStatus == "2" ?
-                                                                <span className='badge bg-danger'>Rejected</span>
-                                                                : <span className='badge bg-secondary'>Cancelled</span>
-                                                }
+                                                <td>
+                                                    {
+                                                        advance.approvalStatus == "0"
+                                                            ? <span className='badge bg-warning'>Pending</span> :
+                                                            advance.approvalStatus == "1" ?
+                                                                <span className='badge bg-success'>Approved</span>
+                                                                : advance.approvalStatus == "2" ?
+                                                                    <span className='badge bg-danger'>Rejected</span>
+                                                                    : <span className='badge bg-secondary'>Cancelled</span>
+                                                    }
                                                 </td>
                                                 <td>{advance.responseDate ? new Date(advance.responseDate).toLocaleDateString() : "-"}</td>
                                                 <td>{advance.description}</td>
                                                 <td>
                                                     <form onSubmit={(e) => handleAdvanceCancel(e, index, advance.id)}>
-                                                        <button className='btn text-danger'><FaTimes /></button>
+                                                        <button className='btn btn-danger' disabled={advance.approvalStatus != "0"}><FaTimes /></button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -209,62 +232,31 @@ function RequestList() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>22.04.2024</td>
-                                            <td>Annual</td>
-                                            <td>23.04.2024</td>
-                                            <td>27.04.2024</td>
-                                            <td>5</td>
-                                            <td><span className='badge bg-warning'>Pending</span></td>
-                                            <td>-</td>
-                                            <td>
-                                                <form onSubmit={() => handleCancel("1")}>
-                                                    <button className='btn text-danger'><FaTimes /></button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>22.04.2024</td>
-                                            <td>Annual</td>
-                                            <td>23.04.2024</td>
-                                            <td>27.04.2024</td>
-                                            <td>5</td>
-                                            <td><span className='badge bg-warning'>Pending</span></td>
-                                            <td>-</td>
-                                            <td>
-                                                <form onSubmit={() => handleCancel("1")}>
-                                                    <button className='btn text-danger'><FaTimes /></button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>22.04.2024</td>
-                                            <td>Annual</td>
-                                            <td>23.04.2024</td>
-                                            <td>27.04.2024</td>
-                                            <td>5</td>
-                                            <td><span className="badge bg-success">Active</span></td>
-                                            <td>-</td>
-                                            <td>
-                                                <form onSubmit={() => handleCancel("1")}>
-                                                    <button className='btn text-danger'><FaTimes /></button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>22.04.2024</td>
-                                            <td>Annual</td>
-                                            <td>23.04.2024</td>
-                                            <td>27.04.2024</td>
-                                            <td>5</td>
-                                            <td><span className='badge bg-warning'>Pending</span></td>
-                                            <td>-</td>
-                                            <td>
-                                                <form onSubmit={() => handleCancel("1")}>
-                                                    <button className='btn text-danger'><FaTimes /></button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                        {leaves.map((leave, index) => (
+                                            <tr key={index}>
+                                                <td>{new Date(leave.requestDate).toLocaleDateString()}</td>
+                                                <td>{leaveTypes[leave.leaveType]}</td>
+                                                <td>{new Date(leave.startDate).toLocaleDateString()}</td>
+                                                <td>{new Date(leave.endDate).toLocaleDateString()}</td>
+                                                <td>{leave.days}</td>
+                                                <td>
+                                                    {
+                                                        leave.approvalStatus == "0"
+                                                            ? <span className='badge bg-warning'>Pending</span> :
+                                                            leave.approvalStatus == "1" ?
+                                                                <span className='badge bg-success'>Approved</span>
+                                                                : leave.approvalStatus == "2" ?
+                                                                    <span className='badge bg-danger'>Rejected</span>
+                                                                    : <span className='badge bg-secondary'>Cancelled</span>
+                                                    }</td>
+                                                <td>{leave.responseDate ? new Date(leave.responseDate).toLocaleDateString() : "-"}</td>
+                                                <td>
+                                                    <form onSubmit={(e) => handleLeaveCancel(e, index, leave.id)}>
+                                                        <button className='btn btn-danger' disabled={leave.approvalStatus != "0"}><FaTimes /></button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </table>
                             </div>

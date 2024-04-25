@@ -6,24 +6,24 @@ import { FaRegIdBadge } from 'react-icons/fa6';
 import { BsDiagram3 } from 'react-icons/bs';
 import { BsFillPersonFill } from "react-icons/bs";
 
-const EmployeeAvatar = () => {
+const EmployeeAvatar = ({ userId, photo, name, profession, department }) => {
     const popover = (
         <Popover id="popover-trigger-hover-focus">
             <PopoverHeader className='p-3'>
-                <div><BsFillPersonFill /><span className='ms-3'>Oğuzhan Yusuf Doğan</span></div>
+                <div><BsFillPersonFill /><span className='ms-3'>{name}</span></div>
             </PopoverHeader>
             <PopoverBody className='mb-1 p-3'>
-                <div><FaRegIdBadge /><span className='ms-3'>Full Stack Developer</span></div>
+                <div><FaRegIdBadge /><span className='ms-3'>{profession}</span></div>
                 <hr />
-                <div><BsDiagram3 /><span className='ms-3'>IT</span></div>
+                <div><BsDiagram3 /><span className='ms-3'>{department}</span></div>
             </PopoverBody>
         </Popover>
     );
 
     return (
         <OverlayTrigger placement="top" overlay={popover}>
-            <Link to={"/employee-detail/" + "2de61a11-56e3-4726-9ba8-ee4c992a7bcd"}>
-                <img src={managerSample} style={{ cursor: "pointer" }} alt="Your Image" />
+            <Link to={"/employee-detail/" + userId}>
+                <img src={photo ?? managerSample} style={{ cursor: "pointer" }} alt="Your Image" />
             </Link>
         </OverlayTrigger>
     );

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import employeeSample from "../../assets/static/images/logo/manager.jpg"
 
 function EmployeeDetail() {
     const params = useParams();
@@ -15,6 +16,7 @@ function EmployeeDetail() {
         try {
             const response = await axios.get(uri + id);
             if (response.data && response.data.personalDetail) {
+                console.log(response.data);
                 setInfo(response.data);
             }
         } catch (error) {
@@ -32,7 +34,10 @@ function EmployeeDetail() {
                         <div className="card-body">
                             <div className="d-flex justify-content-center align-items-center flex-column">
                                 <div className="avatar avatar-2xl">
-                                    <img src={info ? info.personalDetail.filePath : ""} alt="Avatar" />
+                                    <img
+                                        src={info ? (info.personalDetail.filePath === null ? employeeSample : info.personalDetail.filePath) : employeeSample}
+                                        alt="Avatar"
+                                    />
                                 </div>
 
                                 <h3 className="mt-3">{info ? info.personalDetail.firstName + " " + info.personalDetail.lastName : ""}</h3>

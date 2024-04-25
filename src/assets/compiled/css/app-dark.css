@@ -11094,6 +11094,6 @@ html[data-bs-theme=dark] .popover-header {
 }
 
 html[data-bs-theme=dark] .popover-body {
-    background-color: rgba(var(--bs-body-bg-rgb));
+    background-color: #1e1e2d;
     color: var(--bs-body-color);
 }

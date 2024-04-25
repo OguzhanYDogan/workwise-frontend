@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ExpenseTypeSelector from './ExpenseTypeSelector';
 import AdvanceTypeSelector from './AdvanceTypeSelector';
 import LeaveTypeSelector from './LeaveTypeSelector';
@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 function RequestForm() {
     const expenseUri = "https://workwiseappi.azurewebsites.net/api/expense/";
     const advanceUri = "https://workwiseappi.azurewebsites.net/api/advance/";
+    const leaveUri = "https://workwiseappi.azurewebsites.net/api/leave/";
+    const userId = localStorage.getItem("userId");
     const [requestType, setRequestType] = useState("0");
     const [selectedExpenseType, setSelectedExpenseType] = useState(null);
     const [expenseAmount, setExpenseAmount] = useState(0);
@@ -19,7 +21,23 @@ function RequestForm() {
     const [advanceCurrency, setAdvanceCurrency] = useState("0");
     const [description, setDescription] = useState("");
     const [selectedLeaveType, setSelectedLeaveType] = useState(null);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [remainingDays, setRemainingDays] = useState("");
 
+    useEffect(() => {
+        Get(userId);
+    }, [])
+
+    async function Get(id) {
+        try {
+            const response = await axios.get(leaveUri + "remainingLeaves/" + id);
+            console.log(response.data);
+            setRemainingDays(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
 
     const handleExpenseRequest = async (e) => {
         e.preventDefault();
@@ -28,7 +46,6 @@ function RequestForm() {
         formData.append('Currency', parseInt(expenseCurrency));
         formData.append('File', file);
         formData.append('ExpenseType', parseInt(selectedExpenseType));
-        const userId = localStorage.getItem("userId");
 
         try {
             const response = await axios.post(expenseUri + userId, formData, {
@@ -49,27 +66,30 @@ function RequestForm() {
         formData.append('Currency', parseInt(advanceCurrency));
         formData.append('Description', description);
         formData.append('AdvanceType', parseInt(selectedAdvanceType));
-        const userId = localStorage.getItem("userId");
 
         try {
-            const response = await axios.post(advanceUri + userId, {
-                "description": description,
-                "currency": parseInt(advanceCurrency),
-                "advanceType": parseInt(selectedAdvanceType),
-                "amount": advanceAmount
-            });
-            // ,
-            // {
-            //     description,
-            //     "currency": advanceCurrency,
-            //     "advanceType": selectedAdvanceType,
-            //     "amount": advanceAmount,
-            // });
+            const response = await axios.post(advanceUri + userId, formData);
             console.log(response);
             toast.success("Advance request submitted succesfully");
         } catch (error) {
             console.log(error);
             toast.error("Invalid Attempt")
+        }
+    }
+
+    const handleLeaveRequest = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post(leaveUri + userId, {
+                "startDate": startDate,
+                "endDate": endDate,
+                "leaveType": parseInt(selectedLeaveType)
+            });
+            console.log(response);
+            toast.success("Leave request submitted succesfully");
+        } catch (error) {
+            console.log(error);
+            toast.error(error.response.data);
         }
     }
 
@@ -208,7 +228,14 @@ function RequestForm() {
                 {/* Leave Request */}
                 {requestType === "3" &&
                     <>
-                        <form>
+                        <form onSubmit={handleLeaveRequest}>
+                            <div className="col-12">
+                                <div className="card">
+                                    <div className="card-body">
+                                        <h5 className='mb-0' style={{ fontWeight: "600", fontSize: "1rem" }}>Remaining Leave Days: <span style={{ fontSize: "1.2rem" }} className='fw-bold ms-2'>{remainingDays}</span></h5>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="col-12">
                                 <div className="card">
                                     <div className="card-body">
@@ -227,13 +254,13 @@ function RequestForm() {
                                             <div className='col-md-6 col-12'>
                                                 <div className='form-group'>
                                                     <label htmlFor="leaveStartDate" className='form-label'>Start Date</label>
-                                                    <input id='leaveStartDate' type="date" className='form-control' />
+                                                    <input id='leaveStartDate' type="date" className='form-control' value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='col-md-6 col-12'>
                                                 <div className='form-group'>
                                                     <label htmlFor="leaveEndDate" className='form-label'>End Date</label>
-                                                    <input id='leaveEndDate' type="date" className='form-control' />
+                                                    <input id='leaveEndDate' type="date" className='form-control' value={endDate} onChange={(e) => setEndDate(e.target.value)} />
                                                 </div>
                                             </div>
                                         </div>
