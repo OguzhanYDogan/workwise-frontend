@@ -15,6 +15,7 @@ function CompanyList() {
             const response = await axios.get(uri);
             if (response.data) {
                 setCompanies(response.data);
+                console.log(response.data);
             }
         } catch (error) {
             console.error('Error fetching data:', error);

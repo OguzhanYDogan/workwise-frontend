@@ -62,7 +62,7 @@ function CompanyAdd() {
                 }
             });
             console.log(response);
-            alert("Company Added!");
+            toast.success("Company Added!");
         } catch (error) {
             setErrors(error.response.data.errors);
             toast.error("Error adding company!");
@@ -132,7 +132,7 @@ function CompanyAdd() {
                                             <div className="form-group">
                                                 <label htmlFor="phone-column" className='mb-2'>Phone Number</label>
                                                 <input type="tel" id="phone-column" className="form-control"
-                                                    name="phone-column" placeholder="5xx xxx xx xx" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                                                    name="phone-column" placeholder="05xx xxx xx xx" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                                             </div>
                                         </div>
                                         <div className="col-md-6 col-12">

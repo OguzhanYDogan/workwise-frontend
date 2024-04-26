@@ -87,6 +87,7 @@ function CompanyManagerAdd() {
             console.log(response);
             toast.success("Manager Added!");
         } catch (error) {
+            console.log(error);
             setErrors(error.response.data.errors);
             toast.error("Error adding manager");
         }

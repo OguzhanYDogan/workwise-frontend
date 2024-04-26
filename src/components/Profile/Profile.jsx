@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 function Profile() {
     const uri = "https://workwiseappi.azurewebsites.net/api/user?id="
     const [info, setInfo] = useState(null);
+    const userId = localStorage.getItem("userId");
 
     useEffect(() => {
-        Get(localStorage.getItem("userId"));
+        Get(userId);
     }, []);
 
     async function Get(id) {

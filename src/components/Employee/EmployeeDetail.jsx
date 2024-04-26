@@ -91,7 +91,7 @@ function EmployeeDetail() {
                             <hr />
                             <div className="row mb-4">
                                 <div className="col-3 fw-bold">Leave Date</div>
-                                <div className="col-9 profileInfo">{info ? new Date(info.personalDetail.endDate).toLocaleDateString() : ""}</div>
+                                <div className="col-9 profileInfo">{info ? info.personalDetail.endDate ? new Date(info.personalDetail.endDate).toLocaleDateString() : "-" : ""}</div>
                             </div>
                             <hr />
                             <div className="row mb-4">

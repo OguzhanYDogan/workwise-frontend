@@ -112,10 +112,6 @@ function CompanyDetail() {
                                 <div className="col-9 profileInfo">{companyDetail.status == 1 ? <i className="bi bi-check-lg"></i> : <i className="bi bi-x-lg"></i>}</div>
 
                             </div>
-                            {/* <hr />
-                            <div className="d-flex justify-content-between">
-                                <Link to="/update" className="btn btn-primary">Update Company</Link>
-                            </div> */}
                         </div>
                     </div>
                 </div>
